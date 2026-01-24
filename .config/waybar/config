@@ -21,6 +21,7 @@
         "tray",
         "custom/network",
         "pulseaudio",
+        "pulseaudio#microphone",
         "custom/gpu",
         "cpu",
         "memory",
@@ -48,24 +49,29 @@
     "cpu": {
         "format": "[  {usage}% ]",
         "interval": 2,
-        "tooltip": true
+        "tooltip-format": "CPU Usage"
     },
 
     "memory": {
         "format": "[  {percentage}% ]",
         "interval": 2,
-        "tooltip-format": "{used:0.1f}GB / {total:0.1f}GB"
+        "tooltip-format": "RAM: {used:0.1f}GB / {total:0.1f}GB"
     },
 
     "pulseaudio": {
-        "format": "[ {icon} {volume}% ]",
-        "format-muted": "[  muted ]",
-        "format-icons": {
-            "headphone": "",
-            "default": ["", "", ""]
-        },
+        "format": "[  {volume}%",
+        "format-muted": "[  muted",
         "on-click": "pavucontrol",
         "scroll-step": 5
+    },
+
+    "pulseaudio#microphone": {
+        "format": "{format_source} ]",
+        "format-source": " {volume}%",
+        "format-source-muted": " off",
+        "on-click": "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle",
+        "on-scroll-up": "wpctl set-volume -l 1.0 @DEFAULT_AUDIO_SOURCE@ 5%+",
+        "on-scroll-down": "wpctl set-volume @DEFAULT_AUDIO_SOURCE@ 5%-"
     },
 
     "tray": {
@@ -74,8 +80,8 @@
     },
 
     "custom/power": {
-        "format": "[  ]",
-        "tooltip-format": "Power Menu",
+        "format": "[ ⏻ ]",
+        "tooltip": false,
         "on-click": "~/.config/waybar/scripts/power-menu.sh"
     },
 

@@ -96,6 +96,14 @@ window#waybar {
     color: #4a4a4a;
 }
 
+#pulseaudio.microphone {
+    color: #808080;
+}
+
+#pulseaudio.microphone.source-muted {
+    color: #4a4a4a;
+}
+
 /* === Tray ================================================================= */
 
 #tray {
@@ -146,6 +154,7 @@ window#waybar {
 #cpu:hover,
 #memory:hover,
 #pulseaudio:hover,
+#pulseaudio.microphone:hover,
 #custom-gpu:hover,
 #custom-network:hover {
     color: #7f12ff;
