@@ -1,0 +1,146 @@
+; ============================================================================
+;  System HUD - Purple Cyberpunk Theme
+; ============================================================================
+
+; === Variables ==============================================================
+
+; System stats
+(defpoll cpu_usage :interval "2s" 
+  "top -bn1 | grep 'Cpu(s)' | awk '{print int($2 + $4)}'")
+
+(defpoll ram_usage :interval "3s" 
+  "free | awk '/Mem:/ {printf \"%.0f\", $3/$2 * 100}'")
+
+(defpoll ram_text :interval "3s"
+  "free -h | awk '/Mem:/ {gsub(/i/,\"\"); print $3\"/\"$2}'")
+
+(defpoll disk_usage :interval "30s" 
+  "df / | awk 'NR==2 {print int($5)}'")
+
+(defpoll disk_text :interval "30s"
+  "df -h / | awk 'NR==2 {print $3\"/\"$2}'")
+
+; GPU stats (AMD)
+(defpoll gpu_temp :interval "5s"
+  "cat /sys/class/drm/card1/device/hwmon/hwmon*/temp1_input 2>/dev/null | awk '{printf \"%.0f\", $1/1000}' || echo '0'")
+
+(defpoll gpu_usage :interval "3s"
+  "cat /sys/class/drm/card1/device/gpu_busy_percent 2>/dev/null || echo '0'")
+
+; Network stats
+(defpoll net_up :interval "2s"
+  "~/.config/eww/scripts/network.sh up")
+
+(defpoll net_down :interval "2s"
+  "~/.config/eww/scripts/network.sh down")
+
+; Time
+(defpoll time_hour :interval "1s" "date '+%H'")
+(defpoll time_min :interval "1s" "date '+%M'")
+(defpoll time_sec :interval "1s" "date '+%S'")
+(defpoll date_str :interval "60s" "date '+%A'")
+(defpoll date_full :interval "60s" "date '+%d %B %Y'")
+
+; System info
+(defpoll hostname :interval "3600s" "hostname")
+(defpoll uptime :interval "60s" "uptime -p | sed 's/up //'")
+
+; === Widgets ================================================================
+
+; Header with time
+(defwidget header []
+  (box :class "header" :orientation "v" :space-evenly false
+    (box :class "time-box" :orientation "h" :halign "center" :space-evenly false
+      (label :class "time-digit" :text time_hour)
+      (label :class "time-sep" :text ":")
+      (label :class "time-digit" :text time_min)
+      (label :class "time-sep-dim" :text ":")
+      (label :class "time-sec" :text time_sec))
+    (label :class "date-day" :text date_str)
+    (label :class "date-full" :text date_full)))
+
+; Divider
+(defwidget divider []
+  (box :class "divider" :orientation "h"
+    (label :text "")))
+
+; Stats bar widget
+(defwidget stat-bar [value label icon]
+  (box :class "stat-item" :orientation "v" :space-evenly false
+    (box :class "stat-header" :orientation "h" :space-evenly false
+      (label :class "stat-icon" :text icon)
+      (label :class "stat-label" :text label)
+      (label :class "stat-value" :text "${value}%"))
+    (box :class "stat-bar-container"
+      (scale :class "stat-bar" 
+             :min 0 
+             :max 101
+             :value value
+             :orientation "h"))))
+
+; System section
+(defwidget system-stats []
+  (box :class "section" :orientation "v" :space-evenly false
+    (label :class "section-title" :text "[ SYSTEM ]")
+    (stat-bar :value cpu_usage :label "CPU" :icon "")
+    (stat-bar :value ram_usage :label "RAM" :icon "")
+    (stat-bar :value disk_usage :label "DISK" :icon "")))
+
+; GPU section
+(defwidget gpu-stats []
+  (box :class "section" :orientation "v" :space-evenly false
+    (label :class "section-title" :text "[ GPU ]")
+    (box :class "gpu-grid" :orientation "h" :space-evenly true
+      (box :class "gpu-item" :orientation "v"
+        (label :class "gpu-value" :text "${gpu_temp}°C")
+        (label :class "gpu-label" :text "TEMP"))
+      (box :class "gpu-item" :orientation "v"
+        (label :class "gpu-value" :text "${gpu_usage}%")
+        (label :class "gpu-label" :text "LOAD")))))
+
+; Network section
+(defwidget network-stats []
+  (box :class "section" :orientation "v" :space-evenly false
+    (label :class "section-title" :text "[ NETWORK ]")
+    (box :class "net-grid" :orientation "h" :space-evenly true
+      (box :class "net-item" :orientation "v"
+        (label :class "net-icon-up" :text "")
+        (label :class "net-value" :text net_up))
+      (box :class "net-item" :orientation "v"
+        (label :class "net-icon-down" :text "")
+        (label :class "net-value" :text net_down)))))
+
+; Info section
+(defwidget info-stats []
+  (box :class "section info-section" :orientation "v" :space-evenly false
+    (label :class "section-title" :text "[ INFO ]")
+    (box :class "info-row" :orientation "h" :space-evenly false
+      (label :class "info-label" :text "HOST")
+      (label :class "info-value" :text hostname))
+    (box :class "info-row" :orientation "h" :space-evenly false
+      (label :class "info-label" :text "UP")
+      (label :class "info-value" :text uptime))))
+
+; Main panel widget
+(defwidget panel []
+  (box :class "panel" :orientation "v" :space-evenly false
+    (header)
+    (divider)
+    (system-stats)
+    (gpu-stats)
+    (network-stats)
+    (info-stats)))
+
+; === Windows ================================================================
+
+(defwindow sidebar
+  :monitor 0
+  :geometry (geometry :x "-10px"
+                      :y "0px"
+                      :width "280px"
+                      :height "620px"
+                      :anchor "right center")
+  :stacking "fg"
+  :exclusive false
+  :focusable false
+  (panel))

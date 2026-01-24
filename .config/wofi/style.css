@@ -1,0 +1,72 @@
+/* ============================================================================
+   Greyscale Minimal Theme - Wofi Launcher
+   ============================================================================ */
+
+window {
+    margin: 0;
+    background-color: #0c0c0c;
+    border: 2px solid #1a1a1a;
+    border-radius: 2px;
+    font-family: "JetBrainsMono Nerd Font", monospace;
+    font-size: 11px;
+}
+
+#input {
+    margin: 8px;
+    padding: 8px 12px;
+    border: none;
+    border-bottom: 1px solid #252525;
+    border-radius: 0;
+    background-color: #0c0c0c;
+    color: #a0a0a0;
+    font-family: "JetBrainsMono Nerd Font", monospace;
+    font-size: 11px;
+}
+
+#input:focus {
+    border-bottom: 1px solid #7f12ff;
+    outline: none;
+}
+
+#inner-box {
+    margin: 0;
+    padding: 0;
+    background-color: transparent;
+}
+
+#outer-box {
+    margin: 0;
+    padding: 0;
+    background-color: transparent;
+}
+
+#scroll {
+    margin: 0;
+    padding: 0;
+}
+
+#text {
+    margin: 0;
+    padding: 4px 8px;
+    color: #808080;
+}
+
+#entry {
+    padding: 4px 8px;
+    margin: 2px 8px;
+    border-radius: 2px;
+    background-color: transparent;
+}
+
+#entry:selected {
+    background-color: #141414;
+    border-left: 2px solid #7f12ff;
+}
+
+#entry:selected #text {
+    color: #7f12ff;
+}
+
+#img {
+    margin-right: 8px;
+}

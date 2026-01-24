@@ -1,0 +1,153 @@
+/* ============================================================================
+   Greyscale Minimal Theme - SwayNC Notifications
+   ============================================================================ */
+
+* {
+    font-family: "JetBrainsMono Nerd Font", monospace;
+    font-size: 11px;
+}
+
+/* Control Center */
+.control-center {
+    background: #0c0c0c;
+    border: 2px solid #1a1a1a;
+    border-radius: 2px;
+    padding: 8px;
+}
+
+/* Title */
+.control-center .widget-title {
+    color: #a0a0a0;
+    font-size: 12px;
+    font-weight: bold;
+    margin: 8px;
+}
+
+.control-center .widget-title > button {
+    background: #141414;
+    color: #808080;
+    border: 1px solid #252525;
+    border-radius: 2px;
+    padding: 4px 12px;
+}
+
+.control-center .widget-title > button:hover {
+    background: #1a1a1a;
+    color: #7f12ff;
+    border-color: #7f12ff;
+}
+
+/* DND Toggle */
+.widget-dnd {
+    background: #141414;
+    border: 1px solid #1a1a1a;
+    border-radius: 2px;
+    margin: 8px;
+    padding: 4px 8px;
+}
+
+.widget-dnd > switch {
+    background: #252525;
+    border-radius: 2px;
+}
+
+.widget-dnd > switch:checked {
+    background: #7f12ff;
+}
+
+.widget-dnd > switch slider {
+    background: #808080;
+    border-radius: 2px;
+}
+
+/* Notification Cards */
+.notification-row {
+    outline: none;
+}
+
+.notification {
+    background: #0c0c0c;
+    border: 1px solid #1a1a1a;
+    border-radius: 2px;
+    margin: 4px 8px;
+    padding: 0;
+}
+
+.notification-content {
+    padding: 8px;
+}
+
+.notification.critical {
+    border-left: 2px solid #ef4444;
+}
+
+.notification.low {
+    border-left: 2px solid #606060;
+}
+
+/* App Name */
+.notification .app-name {
+    color: #7f12ff;
+    font-size: 10px;
+    font-weight: bold;
+}
+
+/* Summary */
+.notification .summary {
+    color: #e0e0e0;
+    font-size: 11px;
+    font-weight: bold;
+}
+
+/* Body */
+.notification .body {
+    color: #a0a0a0;
+    font-size: 10px;
+}
+
+/* Time */
+.notification .time {
+    color: #606060;
+    font-size: 9px;
+}
+
+/* Close Button */
+.notification .close-button {
+    background: transparent;
+    color: #606060;
+    border: none;
+    border-radius: 2px;
+    padding: 2px;
+    margin: 4px;
+}
+
+.notification .close-button:hover {
+    background: #1a1a1a;
+    color: #ef4444;
+}
+
+/* Action Buttons */
+.notification-action {
+    background: #141414;
+    color: #808080;
+    border: 1px solid #252525;
+    border-radius: 2px;
+    margin: 4px 2px;
+    padding: 4px 8px;
+}
+
+.notification-action:hover {
+    background: #1a1a1a;
+    color: #7f12ff;
+    border-color: #7f12ff;
+}
+
+/* Floating Notifications */
+.floating-notifications {
+    background: transparent;
+}
+
+/* Blank Window */
+.blank-window {
+    background: transparent;
+}

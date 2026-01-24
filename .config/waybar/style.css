@@ -1,47 +1,166 @@
+/* ============================================================================
+   Minimal Dark Theme with Electric Purple Accent
+   ============================================================================ */
+
 * {
-    margin-left: 2px;
-    margin-right: 2px;
+    border: none;
+    border-radius: 0;
+    min-height: 0;
+    font-family: "JetBrainsMono Nerd Font", monospace;
+    font-size: 11px;
+    font-weight: 500;
 }
+
+/* === Main Bar ============================================================= */
 
 window#waybar {
-    background-color: rgba(0, 0, 0, 0.5);
-    border: none;
-    padding: 2px 0;
+    background: #0c0c0c;
+    color: #a0a0a0;
+    border: 2px solid #1a1a1a;
+    border-radius: 2px;
 }
 
-* {
+/* === Workspaces =========================================================== */
+
+#workspaces {
+    background: transparent;
     padding: 0 4px;
-    margin: 0;
 }
 
-#tray {
-    color: #E6CCFF;
-    background-color: #3D0057;
+#workspaces button {
+    all: initial;
+    padding: 4px 2px;
+    margin: 0 1px;
+    color: #606060;
+    font-family: "JetBrainsMono Nerd Font", monospace;
+    font-size: 11px;
+    background: transparent;
+    transition: all 0.15s ease;
 }
 
-#pulseaudio {
-    color: #E6CCFF;
-    background-color: #3D0057;
+#workspaces button.active {
+    color: #7f12ff;
+}
+
+#workspaces button:hover {
+    color: #e0e0e0;
+}
+
+#workspaces button.urgent {
+    color: #ef4444;
+}
+
+/* === Window Title ========================================================= */
+
+#window {
+    color: #606060;
+    padding: 0 12px;
+    font-size: 10px;
+}
+
+/* === Clock ================================================================ */
+
+#clock {
+    color: #a0a0a0;
+    padding: 0 8px;
+}
+
+/* === System Modules ======================================================= */
+
+#cpu,
+#memory,
+#pulseaudio,
+#tray,
+#custom-power,
+#custom-gpu,
+#custom-network,
+#custom-nowplaying {
+    color: #808080;
+    padding: 0 4px;
+    margin: 0 2px;
 }
 
 #cpu {
-    color: #E6CCFF;
-    background-color: #3D0057;
+    color: #707070;
 }
 
 #memory {
-    color: #E6CCFF;
-    background-color: #3D0057;
+    color: #707070;
 }
 
-#clock {
-    color: #E6CCFF;
-    background-color: #3D0057;
+#pulseaudio {
+    color: #808080;
 }
 
+#pulseaudio.muted {
+    color: #4a4a4a;
+}
+
+/* === Tray ================================================================= */
+
+#tray {
+    padding: 0 8px;
+}
+
+#tray > .passive {
+    -gtk-icon-effect: dim;
+}
+
+#tray > .needs-attention {
+    -gtk-icon-effect: highlight;
+}
+
+/* === Power Button ========================================================= */
+
+#custom-power {
+    color: #606060;
+    padding: 0 8px;
+}
+
+#custom-power:hover {
+    color: #7f12ff;
+}
+
+/* === GPU Module =========================================================== */
+
+#custom-gpu {
+    color: #707070;
+}
+
+/* === Network Module ======================================================= */
+
+#custom-network {
+    color: #707070;
+}
+
+/* === Now Playing ========================================================== */
+
+#custom-nowplaying {
+    color: #7f12ff;
+    font-size: 10px;
+}
+
+/* === Hover Effects ======================================================== */
+
+#clock:hover,
 #cpu:hover,
 #memory:hover,
-#clock:hover,
-#pulseaudio:hover {
-    background-color: #4A006A;
+#pulseaudio:hover,
+#custom-gpu:hover,
+#custom-network:hover {
+    color: #7f12ff;
+    transition: all 0.15s ease;
+}
+
+/* === Tooltip ============================================================== */
+
+tooltip {
+    background: #0c0c0c;
+    border: 1px solid #252525;
+    border-radius: 2px;
+}
+
+tooltip label {
+    color: #a0a0a0;
+    font-family: "JetBrainsMono Nerd Font", monospace;
 }
