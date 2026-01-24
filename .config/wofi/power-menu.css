@@ -1,0 +1,33 @@
+/* Power Menu Style */
+
+window {
+    background-color: #0c0c0c;
+    border: 2px solid #7f12ff;
+    border-radius: 8px;
+}
+
+* {
+    font-family: "JetBrainsMono Nerd Font", monospace;
+    font-size: 14px;
+}
+
+#outer-box {
+    margin: 10px;
+}
+
+#text {
+    padding: 10px 15px;
+    color: #a0a0a0;
+}
+
+#entry {
+    border-radius: 6px;
+}
+
+#entry:selected {
+    background-color: #7f12ff;
+}
+
+#entry:selected #text {
+    color: #ffffff;
+}
