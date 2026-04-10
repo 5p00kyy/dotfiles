@@ -1,12 +1,14 @@
 #!/bin/bash
-# Steam Deck-friendly Gamescope profile for Sunshine/Moonlight streaming.
-# Keeps default steam profile intact, only overrides resolution behavior.
+# Steam Deck OLED-friendly Gamescope profile for Sunshine/Moonlight streaming.
+# Keeps default steam profile intact, only overrides Deck-specific output behavior.
 STEAM_SESSION_FILE=/usr/share/gamescope-session-plus/sessions.d/steam
 [[ -f "${STEAM_SESSION_FILE}" ]] && . "${STEAM_SESSION_FILE}"
 
-# Force 16:10 output for Deck streaming.
-SCREEN_WIDTH=1280
-SCREEN_HEIGHT=800
-INTERNAL_WIDTH=1280
-INTERNAL_HEIGHT=800
+# Force 16:10 output for Deck streaming, with higher-res supersampled output.
+SCREEN_WIDTH=2560
+SCREEN_HEIGHT=1600
+INTERNAL_WIDTH=2560
+INTERNAL_HEIGHT=1600
 DRM_MODE=fixed
+CUSTOM_REFRESH_RATES=45,90
+export STEAM_DISPLAY_REFRESH_LIMITS=45,90

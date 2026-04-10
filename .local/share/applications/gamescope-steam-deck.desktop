@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=Steam Deck Gamescope
+Comment=Launch the 2560x1600 16:10 Gamescope session for Steam Deck streaming
+Exec=/home/pacey/.local/bin/gamescope-steam-deck
+Icon=steam
+Terminal=false
+Categories=Game;
+Keywords=steam;gamescope;deck;moonlight;sunshine;
