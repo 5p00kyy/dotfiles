@@ -1,74 +1,11 @@
-/* ============================================================================
-    Purple Cyberpunk Minimal Theme - Wofi Launcher
-    ============================================================================ */
-
-window {
-    margin: 0;
-    background-color: #0c0c0c;
-    border: 2px solid #7f12ff;
-    border-radius: 8px;
-    font-family: "JetBrainsMono Nerd Font", monospace;
-    font-size: 11px;
-}
-
-* {
-    color: #a0a0a0;
-}
-
-#input {
-    margin: 10px;
-    padding: 10px 15px;
-    border: none;
-    border-bottom: 1px solid #252525;
-    border-radius: 0;
-    background-color: transparent;
-    font-family: "JetBrainsMono Nerd Font", monospace;
-    font-size: 11px;
-}
-
-#input:focus {
-    border-bottom: 1px solid #7f12ff;
-    outline: none;
-}
-
-#inner-box {
-    margin: 0;
-    padding: 0;
-    background-color: transparent;
-}
-
-#outer-box {
-    margin: 0;
-    padding: 0;
-    background-color: transparent;
-}
-
-#scroll {
-    margin: 0;
-    padding: 0;
-}
-
-#text {
-    margin: 0;
-    padding: 10px 15px;
-    color: #a0a0a0;
-}
-
-#entry {
-    padding: 0;
-    margin: 4px 8px;
-    border-radius: 6px;
-    background-color: transparent;
-}
-
-#entry:selected {
-    background-color: #7f12ff;
-}
-
-#entry:selected #text {
-    color: #ffffff;
-}
-
-#img {
-    margin-right: 10px;
-}
+@import url("../theme/current-accent.css");
+window { margin: 0; background-color: #0c0c0c; border: 2px solid @accent; border-radius: 8px; font-family: "JetBrainsMono Nerd Font", monospace; font-size: 11px; }
+* { color: #a0a0a0; }
+#input { margin: 10px; padding: 10px 15px; border: none; border-bottom: 1px solid #252525; border-radius: 0; background-color: transparent; font-family: "JetBrainsMono Nerd Font", monospace; font-size: 11px; }
+#input:focus { border-bottom: 1px solid @accent; outline: none; }
+#inner-box,#outer-box,#scroll { margin: 0; padding: 0; background-color: transparent; }
+#text { margin: 0; padding: 10px 15px; color: #a0a0a0; }
+#entry { padding: 0; margin: 4px 8px; border-radius: 6px; background-color: transparent; }
+#entry:selected { background-color: @accent; }
+#entry:selected #text { color: #ffffff; }
+#img { margin-right: 10px; }
