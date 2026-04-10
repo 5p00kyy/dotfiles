@@ -1,0 +1,4 @@
+#!/bin/bash
+set -euo pipefail
+systemctl --user stop gamescope-session-plus@steam.service 2>/dev/null || true
+exec systemctl --user start gamescope-session-plus@steam-deck.service

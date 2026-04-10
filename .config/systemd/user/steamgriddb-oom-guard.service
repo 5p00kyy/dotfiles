@@ -1,0 +1,12 @@
+[Unit]
+Description=Kill runaway Decky SteamGridDB plugin before it OOMs the session
+After=default.target
+
+[Service]
+Type=simple
+ExecStart=%h/.local/bin/steamgriddb-oom-guard.sh
+Restart=always
+RestartSec=2
+
+[Install]
+WantedBy=default.target
