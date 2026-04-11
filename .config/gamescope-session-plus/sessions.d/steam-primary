@@ -8,6 +8,17 @@ unset DRM_MODE
 unset ENABLE_GAMESCOPE_HDR
 unset GAMESCOPE_HDR_NITS
 
+post_gamescope_start() {
+  if command -v steam-tweaks >/dev/null; then
+    steam-tweaks
+  fi
+  "$HOME/.local/bin/decky-session-loader" start
+}
+
+post_client_shutdown() {
+  "$HOME/.local/bin/decky-session-loader" stop
+}
+
 OUTPUT_CONNECTOR=DP-1
 ADAPTIVE_SYNC=1
 export DISABLE_LSFG=1

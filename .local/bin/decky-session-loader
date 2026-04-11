@@ -1,0 +1,53 @@
+#!/usr/bin/env bash
+set -euo pipefail
+LOADER="$HOME/homebrew/services/PluginLoader"
+STATE_DIR="${XDG_STATE_HOME:-$HOME/.local/state}/decky-loader"
+PID_FILE="$STATE_DIR/pluginloader.pid"
+LOG_FILE="$HOME/homebrew/logs/pluginloader-session.log"
+mkdir -p "$STATE_DIR" "$(dirname "$LOG_FILE")"
+
+is_running() {
+  [[ -f "$PID_FILE" ]] && kill -0 "$(cat "$PID_FILE")" 2>/dev/null
+}
+
+start_loader() {
+  if is_running; then
+    exit 0
+  fi
+  if [[ ! -x "$LOADER" ]]; then
+    echo "Decky PluginLoader not found at $LOADER" >&2
+    exit 1
+  fi
+  nohup env \
+    UNPRIVILEGED_PATH="$HOME/homebrew" \
+    PRIVILEGED_PATH="$HOME/homebrew" \
+    LOG_LEVEL=INFO \
+    "$LOADER" >>"$LOG_FILE" 2>&1 &
+  echo $! > "$PID_FILE"
+}
+
+stop_loader() {
+  if is_running; then
+    kill "$(cat "$PID_FILE")" 2>/dev/null || true
+    rm -f "$PID_FILE"
+  fi
+  pkill -u "$USER" -f "$HOME/homebrew/services/PluginLoader" 2>/dev/null || true
+}
+
+case "${1:-}" in
+  start) start_loader ;;
+  stop) stop_loader ;;
+  restart) stop_loader; start_loader ;;
+  status)
+    if is_running; then
+      echo "running $(cat "$PID_FILE")"
+    else
+      echo "stopped"
+      exit 1
+    fi
+    ;;
+  *)
+    echo "usage: $0 {start|stop|restart|status}" >&2
+    exit 2
+    ;;
+esac

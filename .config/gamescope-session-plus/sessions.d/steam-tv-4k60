@@ -9,6 +9,17 @@ unset ADAPTIVE_SYNC
 unset ENABLE_GAMESCOPE_HDR
 unset GAMESCOPE_HDR_NITS
 
+post_gamescope_start() {
+  if command -v steam-tweaks >/dev/null; then
+    steam-tweaks
+  fi
+  "$HOME/.local/bin/decky-session-loader" start
+}
+
+post_client_shutdown() {
+  "$HOME/.local/bin/decky-session-loader" stop
+}
+
 OUTPUT_CONNECTOR=HDMI-A-1
 SCREEN_WIDTH=3840
 SCREEN_HEIGHT=2160
