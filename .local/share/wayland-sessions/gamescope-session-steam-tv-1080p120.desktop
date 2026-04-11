@@ -1,0 +1,7 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=Steam Big Picture (TV 1080p120)
+Comment=Steam Big Picture session on the TV at 1920x1080 120 Hz
+Exec=gamescope-session-plus steam-tv-1080p120
+Type=Application
+DesktopNames=gamescope

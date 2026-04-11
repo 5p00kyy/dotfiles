@@ -1,0 +1,7 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=Steam Big Picture (Deck)
+Comment=Steam Big Picture session for Steam Deck streaming
+Exec=gamescope-session-plus steam-deck
+Type=Application
+DesktopNames=gamescope

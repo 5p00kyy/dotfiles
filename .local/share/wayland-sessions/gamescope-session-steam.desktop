@@ -1,0 +1,7 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=Steam Big Picture (Primary)
+Comment=Steam Big Picture session on the primary monitor
+Exec=gamescope-session-plus steam-primary
+Type=Application
+DesktopNames=gamescope

@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+set -euo pipefail
+SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
+DOTFILES_ROOT="$(cd -- "$SCRIPT_DIR/../.." && pwd)"
+SRC_DIR="$DOTFILES_ROOT/.local/share/wayland-sessions"
+install -Dm644 "$SRC_DIR/gamescope-session-steam.desktop" /usr/share/wayland-sessions/gamescope-session-steam.desktop
+install -Dm644 "$SRC_DIR/gamescope-session-steam-tv-4k60.desktop" /usr/share/wayland-sessions/gamescope-session-steam-tv-4k60.desktop
+install -Dm644 "$SRC_DIR/gamescope-session-steam-tv-1080p120.desktop" /usr/share/wayland-sessions/gamescope-session-steam-tv-1080p120.desktop
+install -Dm644 "$SRC_DIR/gamescope-session-steam-deck.desktop" /usr/share/wayland-sessions/gamescope-session-steam-deck.desktop
