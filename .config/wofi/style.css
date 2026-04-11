@@ -1,11 +1,64 @@
 @import url("../theme/current-accent.css");
-window { margin: 0; background-color: #0c0c0c; border: 2px solid @accent; border-radius: 8px; font-family: "JetBrainsMono Nerd Font", monospace; font-size: 11px; }
-* { color: #a0a0a0; }
-#input { margin: 10px; padding: 10px 15px; border: none; border-bottom: 1px solid #252525; border-radius: 0; background-color: transparent; font-family: "JetBrainsMono Nerd Font", monospace; font-size: 11px; }
-#input:focus { border-bottom: 1px solid @accent; outline: none; }
-#inner-box,#outer-box,#scroll { margin: 0; padding: 0; background-color: transparent; }
-#text { margin: 0; padding: 10px 15px; color: #a0a0a0; }
-#entry { padding: 0; margin: 4px 8px; border-radius: 6px; background-color: transparent; }
-#entry:selected { background-color: @accent; }
-#entry:selected #text { color: #ffffff; }
-#img { margin-right: 10px; }
+
+window {
+  margin: 0;
+  background-color: #0d1117;
+  border: 1px solid #30363d;
+  border-radius: 0;
+  font-family: "JetBrainsMono Nerd Font", "Geist Mono", monospace;
+  font-size: 11px;
+}
+
+* {
+  color: #8b949e;
+}
+
+#input {
+  margin: 12px;
+  padding: 10px 12px;
+  border: none;
+  border-bottom: 1px solid #30363d;
+  border-radius: 0;
+  background-color: transparent;
+  color: #e6edf3;
+}
+
+#input:focus {
+  border-bottom: 1px solid @accent;
+  outline: none;
+}
+
+#inner-box,
+#outer-box,
+#scroll {
+  margin: 0;
+  padding: 0;
+  background-color: transparent;
+}
+
+#text {
+  margin: 0;
+  padding: 10px 12px;
+  color: #8b949e;
+}
+
+#entry {
+  padding: 0;
+  margin: 0 12px 6px 12px;
+  border: 1px solid transparent;
+  border-radius: 0;
+  background-color: #161b22;
+}
+
+#entry:selected {
+  background-color: #161b22;
+  border-color: @accent;
+}
+
+#entry:selected #text {
+  color: #e6edf3;
+}
+
+#img {
+  margin-right: 10px;
+}
