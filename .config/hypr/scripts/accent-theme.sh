@@ -5,7 +5,7 @@ STATE_DIR="${XDG_STATE_HOME:-$HOME/.local/state}/hypr"
 STATE_FILE="$STATE_DIR/accent-theme"
 mkdir -p "$STATE_DIR"
 current(){ [[ -f "$STATE_FILE" ]] && cat "$STATE_FILE" || echo green; }
-write_state(){ printf %sn "$1" > "$STATE_FILE"; }
+write_state(){ printf '%s\n' "$1" > "$STATE_FILE"; }
 apply_links(){ ln -sfn "accent-$1.css" "$THEME_DIR/current-accent.css"; }
 apply_hypr(){
   local t=$1
@@ -23,9 +23,14 @@ notify(){ command -v notify-send >/dev/null 2>&1 && notify-send -a Theme "Accent
 waybar_json(){
   local t text class
   t=$(current)
-  if [[ "$t" == purple ]]; then text=[ ACC PUR ]; class=accent-purple; else text=[ ACC GRN ]; class=accent-green; fi
-  jq -cn --arg text "$text" --arg class "$class" --arg tooltip "Left click: toggle accent
-Current accent: $t" text:
+  if [[ "$t" == purple ]]; then
+    text='[ ACC PUR ]'
+    class='accent-purple'
+  else
+    text='[ ACC GRN ]'
+    class='accent-green'
+  fi
+  jq -cn --arg text "$text" --arg class "$class" --arg tooltip "Left click: toggle accent\nCurrent accent: $t" '{text:$text,class:$class,tooltip:$tooltip}'
 }
 apply(){ [[ "${1:-}" =~ ^(purple|green)$ ]] || { echo invalid theme >&2; exit 1; }; apply_links "$1"; write_state "$1"; apply_hypr "$1"; reload_ui; notify "$1"; }
 cycle(){ [[ "$(current)" == green ]] && apply purple || apply green; }
