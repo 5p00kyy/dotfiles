@@ -3,21 +3,21 @@
 window {
   margin: 0;
   background-color: #0d1117;
-  border: 1px solid #30363d;
+  border: 1px solid #2d333b;
   border-radius: 0;
   font-family: "JetBrainsMono Nerd Font", "Geist Mono", monospace;
   font-size: 11px;
 }
 
 * {
-  color: #8b949e;
+  color: #9aa4af;
 }
 
 #input {
   margin: 12px;
   padding: 10px 12px;
   border: none;
-  border-bottom: 1px solid #30363d;
+  border-bottom: 1px solid #2d333b;
   border-radius: 0;
   background-color: transparent;
   color: #e6edf3;
@@ -39,7 +39,7 @@ window {
 #text {
   margin: 0;
   padding: 10px 12px;
-  color: #8b949e;
+  color: #9aa4af;
 }
 
 #entry {
@@ -47,11 +47,11 @@ window {
   margin: 0 12px 6px 12px;
   border: 1px solid transparent;
   border-radius: 0;
-  background-color: #161b22;
+  background-color: #141a22;
 }
 
 #entry:selected {
-  background-color: #161b22;
+  background-color: #141a22;
   border-color: @accent;
 }
 
