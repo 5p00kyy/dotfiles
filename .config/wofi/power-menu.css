@@ -1,8 +1,6 @@
-@import url("../theme/current-accent.css");
-
 window {
-  background-color: #0d1117;
-  border: 1px solid #2d333b;
+  background-color: #1a1a1a;
+  border: 2px solid #e6e6e6;
   border-radius: 0;
 }
 
@@ -16,8 +14,8 @@ window {
 }
 
 #text {
-  padding: 10px 14px;
-  color: #9aa4af;
+  padding: 10px 15px;
+  color: #cfcfcf;
 }
 
 #entry {
@@ -26,10 +24,10 @@ window {
 }
 
 #entry:selected {
-  background-color: #161b22;
-  border-left: 2px solid @accent;
+  background-color: #303030;
+  border-left: 2px solid #e6e6e6;
 }
 
 #entry:selected #text {
-  color: #e6edf3;
+  color: #ffffff;
 }

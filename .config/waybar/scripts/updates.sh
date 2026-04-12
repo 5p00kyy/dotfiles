@@ -2,15 +2,11 @@
 set -euo pipefail
 if command -v checkupdates >/dev/null 2>&1; then
   count=$(checkupdates 2>/dev/null | wc -l)
-  class="ok"
-  if (( count > 40 )); then
-    class="warn"
+  if (( count > 0 )); then
+    jq -cn --arg text "upd ${count}" --arg class "has-updates" --arg tooltip "Pending pacman updates: ${count}" '{text:$text,class:$class,tooltip:$tooltip}'
+  else
+    jq -cn --arg text "upd 0" --arg class "" --arg tooltip "System is up to date" '{text:$text,class:$class,tooltip:$tooltip}'
   fi
-  text="[ UPD ${count} ]"
-  tooltip="Pending pacman updates: ${count}"
 else
-  class="warn"
-  text="[ UPD n/a ]"
-  tooltip="checkupdates not available"
+  jq -cn --arg text "upd n/a" --arg class "" --arg tooltip "checkupdates not available" '{text:$text,class:$class,tooltip:$tooltip}'
 fi
-jq -cn --arg text "$text" --arg class "$class" --arg tooltip "$tooltip" '{text:$text,class:$class,tooltip:$tooltip}'

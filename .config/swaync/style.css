@@ -1,133 +1,56 @@
-@import url("../theme/current-accent.css");
-
 * {
   font-family: "JetBrainsMono Nerd Font", monospace;
   font-size: 11px;
 }
 
 .control-center {
-  background: #0d1117;
-  border: 1px solid #2d333b;
+  background: #1a1a1a;
+  border: 1px solid #303030;
   border-radius: 0;
   padding: 10px;
 }
 
-.control-center .widget-title {
-  color: #e6edf3;
-  font-size: 12px;
+.control-center .widget-title,
+.notification .summary {
+  color: #e6e6e6;
   font-weight: bold;
-  margin: 8px;
 }
 
-.control-center .widget-title > button {
-  background: #161b22;
-  color: #9aa4af;
-  border: 1px solid #2d333b;
+.control-center .widget-title > button,
+.notification-action {
+  background: #222222;
+  color: #cfcfcf;
+  border: 1px solid #303030;
   border-radius: 0;
-  padding: 4px 12px;
 }
 
-.control-center .widget-title > button:hover {
-  background: #1f2630;
-  color: @accent;
-  border-color: @accent;
+.control-center .widget-title > button:hover,
+.notification-action:hover {
+  color: #ffffff;
+  border-color: #e6e6e6;
 }
 
-.widget-dnd {
-  background: #161b22;
-  border: 1px solid #2d333b;
-  border-radius: 0;
-  margin: 8px;
-  padding: 6px 10px;
-}
-
-.widget-dnd > switch {
-  background: #30363d;
-  border-radius: 999px;
-}
-
-.widget-dnd > switch:checked {
-  background: @accent;
-}
-
-.widget-dnd > switch slider {
-  background: #c9d1d9;
-  border-radius: 999px;
-}
-
-.notification-row {
-  outline: none;
-}
-
+.widget-dnd,
 .notification {
-  background: #11161d;
-  border: 1px solid #2d333b;
+  background: #1f1f1f;
+  border: 1px solid #303030;
   border-radius: 0;
-  margin: 6px 8px;
-  padding: 0;
-}
-
-.notification-content {
-  padding: 10px;
-}
-
-.notification.critical {
-  border-left: 2px solid #ff7b72;
-}
-
-.notification.low {
-  border-left: 2px solid #4b5563;
 }
 
 .notification .app-name {
-  color: @accent;
-  font-size: 10px;
-  font-weight: bold;
+  color: #3fb950;
 }
 
-.notification .summary {
-  color: #e6edf3;
-  font-size: 11px;
-  font-weight: bold;
-}
-
-.notification .body {
-  color: #9aa4af;
-  font-size: 10px;
-}
-
-.notification .time {
-  color: #6e7681;
-  font-size: 9px;
-}
-
+.notification .body,
+.notification .time,
+.control-center .widget-title > button,
+.notification-action,
 .notification .close-button {
-  background: transparent;
-  color: #6e7681;
-  border: none;
-  border-radius: 0;
-  padding: 2px;
-  margin: 4px;
+  color: #b7b7b7;
 }
 
 .notification .close-button:hover {
-  background: #1f2630;
-  color: #ff7b72;
-}
-
-.notification-action {
-  background: #161b22;
-  color: #9aa4af;
-  border: 1px solid #2d333b;
-  border-radius: 0;
-  margin: 4px 2px;
-  padding: 4px 8px;
-}
-
-.notification-action:hover {
-  background: #1f2630;
-  color: @accent;
-  border-color: @accent;
+  color: #ffffff;
 }
 
 .floating-notifications,

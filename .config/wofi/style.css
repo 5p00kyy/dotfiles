@@ -1,31 +1,25 @@
-@import url("../theme/current-accent.css");
-
 window {
-  margin: 0;
-  background-color: #0d1117;
-  border: 1px solid #2d333b;
+  background-color: #1a1a1a;
+  border: 2px solid #e6e6e6;
   border-radius: 0;
   font-family: "JetBrainsMono Nerd Font", monospace;
-  font-size: 11px;
+  font-size: 13px;
 }
 
 * {
-  color: #c9d1d9;
+  color: #e6e6e6;
 }
 
 #input {
-  margin: 10px;
+  margin: 18px 20px 0 20px;
   padding: 10px 12px;
   border: none;
-  border-bottom: 1px solid #2d333b;
-  border-radius: 0;
+  border-bottom: 1px solid #303030;
   background-color: transparent;
-  font-family: "JetBrainsMono Nerd Font", monospace;
-  font-size: 11px;
 }
 
 #input:focus {
-  border-bottom: 1px solid @accent;
+  border-bottom: 1px solid #e6e6e6;
   outline: none;
 }
 
@@ -37,29 +31,23 @@ window {
   background-color: transparent;
 }
 
-#text {
-  margin: 0;
-  padding: 10px 12px;
-  color: #9aa4af;
-}
-
 #entry {
   padding: 0;
-  margin: 2px 8px;
-  border-radius: 0;
-  border-left: 2px solid transparent;
+  margin: 2px 12px;
   background-color: transparent;
+  border-left: 2px solid transparent;
+}
+
+#text {
+  padding: 10px 12px;
+  color: #cfcfcf;
 }
 
 #entry:selected {
-  background-color: #161b22;
-  border-left: 2px solid @accent;
+  background-color: #303030;
+  border-left: 2px solid #e6e6e6;
 }
 
 #entry:selected #text {
-  color: #e6edf3;
-}
-
-#img {
-  margin-right: 10px;
+  color: #ffffff;
 }
