@@ -1,7 +1,7 @@
 window {
-  background-color: #1a1a1a;
-  border: 2px solid #e6e6e6;
-  border-radius: 0;
+  background-color: rgba(40, 44, 52, 0.96);
+  border: 2px solid #61afef;
+  border-radius: 4px;
 }
 
 * {
@@ -15,19 +15,18 @@ window {
 
 #text {
   padding: 10px 15px;
-  color: #cfcfcf;
+  color: #fab387;
 }
 
 #entry {
-  border-radius: 0;
-  border-left: 2px solid transparent;
+  border-radius: 3px;
 }
 
 #entry:selected {
-  background-color: #303030;
-  border-left: 2px solid #e6e6e6;
+  background-color: #191919;
+  border: 1px solid #56b6c2;
 }
 
 #entry:selected #text {
-  color: #ffffff;
+  color: #e5c07b;
 }

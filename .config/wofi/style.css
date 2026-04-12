@@ -1,25 +1,26 @@
 window {
-  background-color: #1a1a1a;
-  border: 2px solid #e6e6e6;
-  border-radius: 0;
+  background-color: rgba(40, 44, 52, 0.96);
+  border: 2px solid #61afef;
+  border-radius: 4px;
   font-family: "JetBrainsMono Nerd Font", monospace;
   font-size: 13px;
 }
 
 * {
-  color: #e6e6e6;
+  color: #9cdef2;
 }
 
 #input {
-  margin: 18px 20px 0 20px;
+  margin: 12px 14px 0 14px;
   padding: 10px 12px;
   border: none;
-  border-bottom: 1px solid #303030;
-  background-color: transparent;
+  border-bottom: 2px solid #56b6c2;
+  background-color: #2e3440;
+  border-radius: 3px 3px 0 0;
 }
 
 #input:focus {
-  border-bottom: 1px solid #e6e6e6;
+  border-bottom: 2px solid #61afef;
   outline: none;
 }
 
@@ -33,21 +34,21 @@ window {
 
 #entry {
   padding: 0;
-  margin: 2px 12px;
+  margin: 3px 8px;
   background-color: transparent;
-  border-left: 2px solid transparent;
+  border-radius: 3px;
 }
 
 #text {
   padding: 10px 12px;
-  color: #cfcfcf;
+  color: #fab387;
 }
 
 #entry:selected {
-  background-color: #303030;
-  border-left: 2px solid #e6e6e6;
+  background-color: #191919;
+  border: 1px solid #56b6c2;
 }
 
 #entry:selected #text {
-  color: #ffffff;
+  color: #e5c07b;
 }

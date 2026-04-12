@@ -1,132 +1,109 @@
-* {
-  border: none;
-  font-family: "JetBrainsMono Nerd Font", monospace;
-  font-size: 12px;
+waybar * {
+  border-radius: 4px;
   min-height: 0;
-  transition: all 0.16s ease;
+  font-family: "JetBrainsMono Nerd Font";
+  font-size: 14px;
+}
+
+#waybar {
+  background-color: #3b4252;
+  border-radius: 3px;
+  opacity: 0.95;
 }
 
 window#waybar {
-  background: transparent;
-  color: #e6edf3;
+  background: #282c34;
+  transition-property: background-color;
+  transition-duration: 0.5s;
+  color: #9cdef2;
+  border: 2px solid #61afef;
+  border-left: 2px solid #56b6c2;
+  border-right: 2px solid #56b6c2;
 }
 
-#custom-launcher,
-#custom-displaymode,
-#workspaces,
-#window,
-#custom-nowplaying,
-#custom-network,
-#custom-gpu,
-#cpu,
-#memory,
-#pulseaudio,
-#tray,
 #clock,
-#custom-update,
-#custom-power {
-  background: rgba(22, 27, 34, 0.94);
-  border: 1px solid #30363d;
-  border-radius: 12px;
-  margin-top: 4px;
-  margin-bottom: 4px;
-  padding: 0 12px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.18);
+#custom-power,
+#custom-network,
+#custom-microphone,
+#custom-gpu,
+#custom-volume,
+#memory,
+#custom-displaymode,
+#custom-workspace-1,
+#custom-workspace-2,
+#custom-workspace-3,
+#custom-workspace-4,
+#custom-workspace-5 {
+  padding: 4px 10px;
+  margin: 4px 4px;
+  background-color: #2e3440;
+  color: #9cdef2;
+  border: 2px solid transparent;
 }
 
-#custom-launcher {
-  color: #3fb950;
-  font-size: 15px;
-  padding-left: 14px;
-  padding-right: 14px;
+#custom-workspace-1,
+#custom-workspace-2,
+#custom-workspace-3,
+#custom-workspace-4,
+#custom-workspace-5,
+#custom-displaymode {
+  min-width: 24px;
+  text-align: center;
 }
 
 #custom-displaymode {
-  color: #79c0ff;
-}
-
-#workspaces {
-  padding: 0 6px;
-}
-
-#workspaces button {
-  min-width: 0;
-  padding: 4px 10px;
-  margin: 4px 3px;
-  border-radius: 10px;
-  background: transparent;
-  color: #8b949e;
-  box-shadow: none;
-  text-shadow: none;
-}
-
-#workspaces button:hover {
-  background: #1f2630;
-  color: #e6edf3;
-}
-
-#workspaces button.active,
-#workspaces button.focused {
-  background: linear-gradient(90deg, #1f6feb 0%, #3fb950 100%);
-  color: #ffffff;
-}
-
-#window {
-  color: #d0d7de;
-  font-weight: 600;
-  padding-left: 16px;
-  padding-right: 16px;
-}
-
-#custom-nowplaying {
-  color: #79c0ff;
+  color: #e5c07b;
   padding-left: 14px;
   padding-right: 14px;
 }
 
-#custom-network.warn,
-#custom-gpu.warn,
-#custom-update.has-updates {
-  color: #d29922;
+#custom-workspace-1.active,
+#custom-workspace-2.active,
+#custom-workspace-3.active,
+#custom-workspace-4.active,
+#custom-workspace-5.active {
+  background-color: #3b4252;
+  border: 2px solid #56b6c2;
+  color: #fab387;
 }
 
-#custom-network.crit,
-#custom-gpu.crit {
-  color: #ff7b72;
-  border-color: #ff7b72;
-}
-
-#clock {
-  font-weight: 700;
-}
-
-#custom-power {
-  color: #ff7b72;
-  padding-right: 14px;
-  padding-left: 14px;
-}
-
-#custom-launcher:hover,
-#custom-displaymode:hover,
-#window:hover,
-#custom-nowplaying:hover,
-#custom-network:hover,
-#custom-gpu:hover,
-#cpu:hover,
-#memory:hover,
-#pulseaudio:hover,
-#tray:hover,
+#custom-workspace-1:hover,
+#custom-workspace-2:hover,
+#custom-workspace-3:hover,
+#custom-workspace-4:hover,
+#custom-workspace-5:hover,
 #clock:hover,
-#custom-update:hover,
-#custom-power:hover {
-  background: rgba(31, 38, 48, 0.98);
-  border-color: #58a6ff;
-  color: #ffffff;
+#custom-power:hover,
+#custom-network:hover,
+#custom-microphone:hover,
+#custom-gpu:hover,
+#custom-volume:hover,
+#memory:hover,
+#custom-displaymode:hover {
+  background-color: #4c566a;
+  border: 2px solid #56b6c2;
+  color: #56b6c2;
+  transition: all 0.2s ease-in-out;
+}
+
+#custom-gpu.warn,
+#custom-network.warn,
+#custom-volume.warn {
+  color: #fab387;
+}
+
+#custom-gpu.crit,
+#custom-network.crit {
+  color: #bf616a;
 }
 
 tooltip {
-  background: #0d1117;
-  color: #e6edf3;
-  border: 1px solid #30363d;
-  border-radius: 10px;
+  color: #56b6c2;
+  background-color: #3b4252;
+  border: 1px solid #56b6c2;
+  font-weight: bold;
+}
+
+tooltip label {
+  color: #78bec7;
 }
