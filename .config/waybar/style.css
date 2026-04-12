@@ -1,162 +1,21 @@
 @import url("../theme/current-accent.css");
-
-* {
-  border: none;
-  border-radius: 0;
-  min-height: 0;
-  font-family: "JetBrainsMono Nerd Font", "Geist Mono", monospace;
-  font-size: 11px;
-  font-weight: 600;
-}
-
-window#waybar {
-  background: rgba(10, 14, 20, 0.94);
-  color: #8b949e;
-  border: 1px solid #2d333b;
-}
-
-#custom-profile,
-#custom-displaymode,
-#workspaces,
-#window,
-#custom-network,
-#custom-updates,
-#custom-system,
-#custom-nowplaying,
-#pulseaudio,
-#tray,
-#clock,
-#custom-power {
-  margin-top: 6px;
-  margin-bottom: 6px;
-}
-
-#custom-profile,
-#custom-displaymode,
-#custom-network,
-#custom-updates,
-#custom-system,
-#custom-nowplaying,
-#pulseaudio,
-#tray,
-#clock,
-#custom-power {
-  padding: 0 11px;
-  background: #141a22;
-  border: 1px solid #2d333b;
-  color: #9aa4af;
-}
-
-#custom-profile {
-  color: @accent;
-  margin-left: 6px;
-  border-color: rgba(63,185,80,0.35);
-}
-
-#custom-profile.warn,
-#custom-network.warn,
-#custom-updates.warn,
-#custom-system.warn {
-  color: #f2cc60;
-}
-
-#custom-network.crit,
-#custom-system.crit {
-  color: #ff7b72;
-  border-color: #ff7b72;
-}
-
-#custom-displaymode {
-  color: #7ee787;
-}
-
-#window {
-  padding: 0 18px;
-  color: #e6edf3;
-}
-
-#workspaces {
-  padding: 0 4px;
-  background: transparent;
-}
-
-#workspaces button {
-  all: initial;
-  min-width: 26px;
-  padding: 4px 8px;
-  margin: 0 2px;
-  color: #6e7681;
-  border: 1px solid transparent;
-  transition: all 0.12s ease;
-}
-
-#workspaces button:hover {
-  color: #e6edf3;
-  background: #141a22;
-  border-color: #2d333b;
-}
-
-#workspaces button.active {
-  color: #e6edf3;
-  background: #141a22;
-  border-color: @accent;
-}
-
-#workspaces button.urgent {
-  color: #ff7b72;
-  border-color: #ff7b72;
-}
-
-#pulseaudio.muted,
-#pulseaudio.microphone.source-muted {
-  color: #6e7681;
-}
-
-#custom-nowplaying {
-  color: #79c0ff;
-}
-
-#clock {
-  color: #e6edf3;
-}
-
-#custom-power {
-  color: #ff7b72;
-  margin-right: 6px;
-}
-
-#custom-profile:hover,
-#custom-displaymode:hover,
-#custom-network:hover,
-#custom-updates:hover,
-#custom-system:hover,
-#custom-nowplaying:hover,
-#pulseaudio:hover,
-#tray:hover,
-#clock:hover,
-#custom-power:hover {
-  color: #e6edf3;
-  border-color: @accent;
-}
-
-#tray {
-  padding: 0 12px;
-}
-
-#tray > .passive {
-  -gtk-icon-effect: dim;
-}
-
-#tray > .needs-attention {
-  -gtk-icon-effect: highlight;
-}
-
-tooltip {
-  background: #0d1117;
-  border: 1px solid #2d333b;
-}
-
-tooltip label {
-  color: #e6edf3;
-  font-family: "JetBrainsMono Nerd Font", "Geist Mono", monospace;
-}
+* { border: none; border-radius: 0; min-height: 0; font-family: "JetBrainsMono Nerd Font", monospace; font-size: 11px; font-weight: 500; }
+window#waybar { background: rgba(10,10,10,0.97); color: #a8a8a8; border: 1px solid #1f1f1f; border-radius: 4px; }
+#workspaces { background: transparent; padding: 2px 6px; }
+#workspaces button { all: initial; padding: 4px 6px; margin: 0 2px; color: #686868; background: transparent; transition: all 0.15s ease; }
+#workspaces button.active { color: #f2f2f2; background: #141414; border-bottom: 2px solid @accent; }
+#workspaces button:hover { color: #f2f2f2; background: #111111; }
+#workspaces button.urgent { color: #ef4444; }
+#window { color: #8c8c8c; padding: 0 14px; font-size: 10px; }
+#clock { color: #f2f2f2; padding: 0 10px; }
+#cpu,#memory,#pulseaudio,#tray,#custom-power,#custom-gpu,#custom-network,#custom-nowplaying,#custom-displaymode,#custom-accent { color: #8a8a8a; padding: 0 8px; margin: 4px 2px; background: #111111; border: 1px solid #1b1b1b; border-radius: 4px; }
+#custom-displaymode,#custom-accent,#custom-nowplaying,#custom-accent.accent-purple,#custom-accent.accent-green { color: @accent; }
+#custom-displaymode:hover,#custom-accent:hover,#clock:hover,#cpu:hover,#memory:hover,#pulseaudio:hover,#pulseaudio.microphone:hover,#custom-gpu:hover,#custom-network:hover,#custom-nowplaying:hover { color: #f2f2f2; border-color: @accent; }
+#pulseaudio.muted,#pulseaudio.microphone.source-muted { color: #565656; }
+#tray { padding: 0 10px; }
+#tray > .passive { -gtk-icon-effect: dim; }
+#tray > .needs-attention { -gtk-icon-effect: highlight; }
+#custom-power { color: #6c6c6c; }
+#custom-power:hover { color: @accent; border-color: @accent; }
+tooltip { background: #0c0c0c; border: 1px solid #252525; border-radius: 4px; }
+tooltip label { color: #d0d0d0; font-family: "JetBrainsMono Nerd Font", monospace; }

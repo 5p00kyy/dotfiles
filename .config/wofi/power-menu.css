@@ -1,36 +1,33 @@
-@import url("../theme/current-accent.css");
+/* Power Menu Style */
 
 window {
-  background-color: #0d1117;
-  border: 1px solid #2d333b;
-  border-radius: 0;
+    background-color: #0c0c0c;
+    border: 2px solid #7f12ff;
+    border-radius: 8px;
 }
 
 * {
-  font-family: "JetBrainsMono Nerd Font", monospace;
-  font-size: 13px;
-  color: #9aa4af;
+    font-family: "JetBrainsMono Nerd Font", monospace;
+    font-size: 14px;
 }
 
 #outer-box {
-  margin: 10px;
+    margin: 10px;
 }
 
 #text {
-  padding: 10px 14px;
+    padding: 10px 15px;
+    color: #a0a0a0;
 }
 
 #entry {
-  border: 1px solid transparent;
-  background: #141a22;
-  margin-bottom: 6px;
+    border-radius: 6px;
 }
 
 #entry:selected {
-  background-color: #141a22;
-  border-color: @accent;
+    background-color: #7f12ff;
 }
 
 #entry:selected #text {
-  color: #e6edf3;
+    color: #ffffff;
 }
