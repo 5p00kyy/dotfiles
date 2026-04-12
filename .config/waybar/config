@@ -2,16 +2,28 @@
   "reload_style_on_change": true,
   "layer": "top",
   "position": "top",
-  "spacing": 0,
-  "height": 28,
-  "modules-left": ["custom/launcher", "hyprland/workspaces", "hyprland/window"],
-  "modules-center": ["clock", "custom/update", "custom/idle-indicator"],
-  "modules-right": ["tray", "network", "pulseaudio", "cpu", "memory", "custom/power"],
+  "spacing": 6,
+  "height": 38,
+  "margin-top": 10,
+  "margin-left": 12,
+  "margin-right": 12,
+  "modules-left": ["custom/launcher", "custom/displaymode", "hyprland/workspaces"],
+  "modules-center": ["hyprland/window", "custom/nowplaying"],
+  "modules-right": ["custom/network", "custom/gpu", "cpu", "memory", "pulseaudio", "tray", "clock", "custom/update", "custom/power"],
 
   "custom/launcher": {
-    "format": "◆",
+    "format": "◉",
     "on-click": "~/.config/hypr/scripts/launcher.sh",
     "tooltip-format": "Launcher"
+  },
+
+  "custom/displaymode": {
+    "exec": "~/.config/hypr/scripts/display-mode.sh waybar",
+    "return-type": "json",
+    "interval": 4,
+    "on-click": "~/.config/hypr/scripts/display-mode.sh menu",
+    "on-click-right": "~/.config/hypr/scripts/display-mode.sh next",
+    "tooltip": true
   },
 
   "hyprland/workspaces": {
@@ -21,9 +33,16 @@
   },
 
   "hyprland/window": {
-    "max-length": 70,
+    "max-length": 54,
     "separate-outputs": true,
     "rewrite": {"": "idle"}
+  },
+
+  "custom/nowplaying": {
+    "exec": "~/.config/waybar/scripts/nowplaying.sh",
+    "interval": 3,
+    "tooltip": false,
+    "on-click": "playerctl play-pause"
   },
 
   "clock": {
@@ -38,20 +57,18 @@
     "tooltip": true
   },
 
-  "custom/idle-indicator": {
-    "exec": "~/.config/waybar/scripts/idle-indicator.sh",
+  "custom/network": {
+    "exec": "~/.config/waybar/scripts/network.sh",
     "return-type": "json",
-    "interval": 5,
-    "on-click": "pidof hyprlock || hyprlock"
+    "interval": 3,
+    "tooltip": true
   },
 
-  "network": {
-    "format-wifi": "wifi",
-    "format-ethernet": "eth",
-    "format-disconnected": "offline",
-    "tooltip-format-wifi": "{essid} ({signalStrength}%)",
-    "tooltip-format-ethernet": "Connected",
-    "tooltip-format-disconnected": "Disconnected"
+  "custom/gpu": {
+    "exec": "~/.config/waybar/scripts/gpu.sh",
+    "return-type": "json",
+    "interval": 3,
+    "tooltip": true
   },
 
   "pulseaudio": {
@@ -72,7 +89,7 @@
   },
 
   "tray": {
-    "icon-size": 12,
+    "icon-size": 14,
     "spacing": 10
   },
 
