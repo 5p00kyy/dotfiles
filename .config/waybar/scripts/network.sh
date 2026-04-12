@@ -1,35 +1,41 @@
-#!/bin/bash
-
-# Get primary interface
-INTERFACE=$(ip route | grep default | awk '{print $5}' | head -1)
-
-if [[ -z "$INTERFACE" ]]; then
-    echo '{"text": "[ NET -- ]", "tooltip": "No network"}'
-    exit 0
+#!/usr/bin/env bash
+set -euo pipefail
+STATE_DIR="${XDG_STATE_HOME:-$HOME/.local/state}/waybar"
+STATE_FILE="$STATE_DIR/network.state"
+mkdir -p "$STATE_DIR"
+iface=$(ip route show default 2>/dev/null | awk '/default/ {print $5; exit}')
+if [[ -z "${iface:-}" || ! -d "/sys/class/net/$iface" ]]; then
+  jq -cn --arg text "[ NET down ]" --arg class "crit" --arg tooltip "No default route" '{text:$text,class:$class,tooltip:$tooltip}'
+  exit 0
 fi
-
-# Read bytes
-RX1=$(cat /sys/class/net/$INTERFACE/statistics/rx_bytes)
-TX1=$(cat /sys/class/net/$INTERFACE/statistics/tx_bytes)
-sleep 1
-RX2=$(cat /sys/class/net/$INTERFACE/statistics/rx_bytes)
-TX2=$(cat /sys/class/net/$INTERFACE/statistics/tx_bytes)
-
-# Calculate KB/s
-RX_KB=$(( (RX2 - RX1) / 1024 ))
-TX_KB=$(( (TX2 - TX1) / 1024 ))
-
-# Format
-if [[ $RX_KB -ge 1024 ]]; then
-    RX_FMT="$(awk "BEGIN {printf \"%.1f\", $RX_KB/1024}")M"
+rx=$(cat "/sys/class/net/$iface/statistics/rx_bytes")
+tx=$(cat "/sys/class/net/$iface/statistics/tx_bytes")
+now=$(date +%s)
+ip4=$(ip -4 addr show dev "$iface" 2>/dev/null | awk '/inet / {print $2; exit}')
+gw=$(ip route show default 2>/dev/null | awk '/default/ {print $3; exit}')
+vpn=$(nmcli -t -f TYPE,NAME connection show --active 2>/dev/null | awk -F: '$1=="vpn" {print $2; exit}')
+ping_ms=$(ping -n -q -c 1 -W 1 1.1.1.1 2>/dev/null | awk -F'/' 'END{if (NF>=5) printf "%d", $5}')
+rx_rate=0
+tx_rate=0
+if [[ -f "$STATE_FILE" ]]; then
+  read -r prev_now prev_rx prev_tx < "$STATE_FILE" || true
+  if [[ -n "${prev_now:-}" && "$now" -gt "$prev_now" ]]; then
+    dt=$((now - prev_now))
+    rx_rate=$(((rx - prev_rx) / dt / 1024))
+    tx_rate=$(((tx - prev_tx) / dt / 1024))
+  fi
+fi
+printf '%s %s %s\n' "$now" "$rx" "$tx" > "$STATE_FILE"
+lat="--"
+class="ok"
+if [[ -n "${ping_ms:-}" ]]; then
+  lat="${ping_ms}ms"
+  if (( ping_ms >= 120 )); then class="warn"; fi
 else
-    RX_FMT="${RX_KB}K"
+  class="warn"
 fi
-
-if [[ $TX_KB -ge 1024 ]]; then
-    TX_FMT="$(awk "BEGIN {printf \"%.1f\", $TX_KB/1024}")M"
-else
-    TX_FMT="${TX_KB}K"
-fi
-
-echo "{\"text\": \"[ ${TX_FMT} ${RX_FMT} ]\", \"tooltip\": \"Interface: $INTERFACE\\nUp: ${TX_FMT}/s\\nDown: ${RX_FMT}/s\"}"
+vpn_tag=""
+[[ -n "${vpn:-}" ]] && vpn_tag=" VPN"
+text="[ NET ${iface}${vpn_tag} ↓${rx_rate} ↑${tx_rate} ${lat} ]"
+tooltip="IP: ${ip4:-unknown}\nGateway: ${gw:-unknown}\nVPN: ${vpn:-off}\nRates: down ${rx_rate} KiB/s, up ${tx_rate} KiB/s"
+jq -cn --arg text "$text" --arg class "$class" --arg tooltip "$tooltip" '{text:$text,class:$class,tooltip:$tooltip}'

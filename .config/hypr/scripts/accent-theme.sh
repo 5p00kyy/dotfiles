@@ -4,18 +4,18 @@ THEME_DIR="$HOME/.config/theme"
 STATE_DIR="${XDG_STATE_HOME:-$HOME/.local/state}/hypr"
 STATE_FILE="$STATE_DIR/accent-theme"
 mkdir -p "$STATE_DIR"
-current(){ [[ -f "$STATE_FILE" ]] && cat "$STATE_FILE" || echo purple; }
+current(){ [[ -f "$STATE_FILE" ]] && cat "$STATE_FILE" || echo green; }
 write_state(){ printf '%s\n' "$1" > "$STATE_FILE"; }
 apply_links(){ ln -sfn "accent-$1.css" "$THEME_DIR/current-accent.css"; }
 apply_hypr(){
   local t=$1
   command -v hyprctl >/dev/null 2>&1 || return 0
   if [[ "$t" == green ]]; then
-    hyprctl keyword general:col.active_border "rgb(00e87a)" >/dev/null 2>&1 || true
-    hyprctl keyword group:groupbar:col.active "rgb(00e87a) rgb(141414) 90deg" >/dev/null 2>&1 || true
+    hyprctl keyword general:col.active_border "rgb(3fb950)" >/dev/null 2>&1 || true
+    hyprctl keyword group:groupbar:col.active "rgb(3fb950) rgb(161b22) 90deg" >/dev/null 2>&1 || true
   else
     hyprctl keyword general:col.active_border "rgb(9b5cff)" >/dev/null 2>&1 || true
-    hyprctl keyword group:groupbar:col.active "rgb(9b5cff) rgb(141414) 90deg" >/dev/null 2>&1 || true
+    hyprctl keyword group:groupbar:col.active "rgb(9b5cff) rgb(161b22) 90deg" >/dev/null 2>&1 || true
   fi
 }
 reload_ui(){ pkill -USR2 waybar 2>/dev/null || true; command -v swaync-client >/dev/null 2>&1 && swaync-client --reload-config >/dev/null 2>&1 || true; }

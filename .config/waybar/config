@@ -1,26 +1,108 @@
 {
   "layer": "top",
   "position": "top",
-  "height": 32,
+  "height": 36,
   "margin-top": 10,
   "margin-left": 10,
   "margin-right": 10,
-  "spacing": 4,
-  "modules-left": ["clock", "custom/nowplaying", "hyprland/window"],
-  "modules-center": ["hyprland/workspaces"],
-  "modules-right": ["custom/displaymode", "custom/accent", "tray", "custom/network", "pulseaudio", "pulseaudio#microphone", "custom/gpu", "cpu", "memory", "custom/power"],
-  "hyprland/workspaces": {"format": "[ {name} ]", "on-click": "activate", "sort-by-number": true},
-  "hyprland/window": {"format": "{title}", "max-length": 52, "separate-outputs": true},
-  "clock": {"format": "[  {:%H:%M} ]", "format-alt": "[  {:%a, %d %b %Y} ]", "tooltip-format": "<tt>{calendar}</tt>"},
-  "cpu": {"format": "[ CPU {usage}% ]", "interval": 2, "tooltip-format": "CPU Usage"},
-  "memory": {"format": "[ RAM {percentage}% ]", "interval": 2, "tooltip-format": "RAM: {used:0.1f}GB / {total:0.1f}GB"},
-  "pulseaudio": {"format": "[ VOL {volume}%", "format-muted": "[ VOL muted", "on-click": "pavucontrol", "scroll-step": 5},
-  "pulseaudio#microphone": {"format": " MIC {format_source} ]", "format-source": "{volume}%", "format-source-muted": "off", "on-click": "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle", "on-scroll-up": "wpctl set-volume -l 1.0 @DEFAULT_AUDIO_SOURCE@ 5%+", "on-scroll-down": "wpctl set-volume @DEFAULT_AUDIO_SOURCE@ 5%-"},
-  "tray": {"icon-size": 14, "spacing": 8},
-  "custom/displaymode": {"exec": "~/.config/hypr/scripts/display-mode.sh waybar", "return-type": "json", "interval": 2, "on-click": "~/.config/hypr/scripts/display-mode.sh menu", "on-click-right": "~/.config/hypr/scripts/display-mode.sh next", "tooltip": true},
-  "custom/accent": {"exec": "~/.config/hypr/scripts/accent-theme.sh waybar", "return-type": "json", "interval": 5, "on-click": "~/.config/hypr/scripts/accent-theme.sh toggle", "tooltip": true},
-  "custom/power": {"format": "[ ⏻ ]", "tooltip": false, "on-click": "~/.config/waybar/scripts/power-menu.sh"},
-  "custom/gpu": {"exec": "~/.config/waybar/scripts/gpu.sh", "interval": 5, "tooltip": false},
-  "custom/network": {"exec": "~/.config/waybar/scripts/network.sh", "return-type": "json", "interval": 3},
-  "custom/nowplaying": {"exec": "~/.config/waybar/scripts/nowplaying.sh", "interval": 3, "tooltip": false, "on-click": "playerctl play-pause"}
+  "spacing": 6,
+  "modules-left": ["custom/profile", "custom/displaymode", "hyprland/workspaces"],
+  "modules-center": ["hyprland/window"],
+  "modules-right": ["custom/network", "custom/system", "custom/updates", "custom/nowplaying", "pulseaudio", "pulseaudio#microphone", "tray", "clock", "custom/power"],
+
+  "hyprland/workspaces": {
+    "format": "[ {name} ]",
+    "on-click": "activate",
+    "sort-by-number": true,
+    "persistent-workspaces": {"*": 5}
+  },
+
+  "hyprland/window": {
+    "format": "{class} :: {title}",
+    "max-length": 110,
+    "separate-outputs": true,
+    "rewrite": {"": "[ idle ]"}
+  },
+
+  "clock": {
+    "format": "[ {:%a %d %b  %H:%M} ]",
+    "format-alt": "[ {:%Y-%m-%d %H:%M:%S} ]",
+    "tooltip-format": "<tt>{calendar}</tt>"
+  },
+
+  "pulseaudio": {
+    "format": "[ VOL {volume}%",
+    "format-muted": "[ VOL muted",
+    "on-click": "pavucontrol",
+    "scroll-step": 5
+  },
+
+  "pulseaudio#microphone": {
+    "format": " MIC {format_source} ]",
+    "format-source": "{volume}%",
+    "format-source-muted": "off",
+    "on-click": "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle",
+    "on-scroll-up": "wpctl set-volume -l 1.0 @DEFAULT_AUDIO_SOURCE@ 5%+",
+    "on-scroll-down": "wpctl set-volume @DEFAULT_AUDIO_SOURCE@ 5%-"
+  },
+
+  "tray": {
+    "icon-size": 14,
+    "spacing": 8
+  },
+
+  "custom/profile": {
+    "exec": "~/.config/waybar/scripts/profile.sh",
+    "return-type": "json",
+    "interval": 5,
+    "on-click": "~/.config/hypr/scripts/ops-dashboard.sh",
+    "on-click-middle": "~/.config/hypr/scripts/display-mode.sh menu",
+    "on-click-right": "~/.config/hypr/scripts/accent-theme.sh toggle",
+    "tooltip": true
+  },
+
+  "custom/displaymode": {
+    "exec": "~/.config/hypr/scripts/display-mode.sh waybar",
+    "return-type": "json",
+    "interval": 4,
+    "on-click": "~/.config/hypr/scripts/display-mode.sh menu",
+    "on-click-right": "~/.config/hypr/scripts/display-mode.sh next",
+    "tooltip": true
+  },
+
+  "custom/network": {
+    "exec": "~/.config/waybar/scripts/network.sh",
+    "return-type": "json",
+    "interval": 3,
+    "tooltip": true
+  },
+
+  "custom/system": {
+    "exec": "~/.config/waybar/scripts/system-health.sh",
+    "return-type": "json",
+    "interval": 3,
+    "tooltip": true,
+    "on-click": "~/.config/hypr/scripts/ops-dashboard.sh"
+  },
+
+  "custom/updates": {
+    "exec": "~/.config/waybar/scripts/updates.sh",
+    "return-type": "json",
+    "interval": 1800,
+    "on-click": "~/.config/hypr/scripts/ops-dashboard.sh",
+    "tooltip": true
+  },
+
+  "custom/nowplaying": {
+    "exec": "~/.config/waybar/scripts/nowplaying.sh",
+    "interval": 3,
+    "tooltip": false,
+    "on-click": "playerctl play-pause"
+  },
+
+  "custom/power": {
+    "format": "[ ⏻ ]",
+    "tooltip": false,
+    "on-click": "~/.config/waybar/scripts/power-menu.sh"
+  }
 }
