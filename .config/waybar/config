@@ -1,99 +1,26 @@
 {
   "layer": "top",
   "position": "top",
-  "margin-top": 12,
-  "margin-bottom": -8,
-  "spacing": 0,
-  "height": 34,
-  "modules-left": ["clock", "custom/power", "custom/network", "custom/microphone"],
-  "modules-center": ["custom/workspace-1", "custom/workspace-2", "custom/displaymode", "custom/workspace-3", "custom/workspace-4", "custom/workspace-5"],
-  "modules-right": ["custom/gpu", "custom/volume", "memory"],
-
-  "clock": {
-    "format": "[ {:%H:%M} ]",
-    "tooltip-format": "<tt>{calendar}</tt>"
-  },
-
-  "custom/power": {
-    "format": "[ ⏻ ]",
-    "tooltip": true,
-    "tooltip-format": "Power Menu",
-    "on-click": "~/.config/waybar/scripts/power-menu.sh"
-  },
-
-  "custom/network": {
-    "exec": "~/.config/waybar/scripts/network.sh",
-    "return-type": "json",
-    "interval": 3,
-    "tooltip": true
-  },
-
-  "custom/microphone": {
-    "exec": "~/.config/waybar/scripts/mic.sh",
-    "return-type": "json",
-    "interval": 2,
-    "on-click": "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle",
-    "tooltip": true
-  },
-
-  "custom/displaymode": {
-    "exec": "~/.config/hypr/scripts/display-mode.sh waybar",
-    "return-type": "json",
-    "interval": 4,
-    "on-click": "~/.config/hypr/scripts/display-mode.sh menu",
-    "on-click-right": "~/.config/hypr/scripts/display-mode.sh next",
-    "tooltip": true
-  },
-
-  "custom/workspace-1": {
-    "exec": "~/.config/waybar/scripts/workspaces/workspace-1.sh",
-    "return-type": "json",
-    "interval": 1,
-    "on-click": "hyprctl dispatch workspace 1"
-  },
-  "custom/workspace-2": {
-    "exec": "~/.config/waybar/scripts/workspaces/workspace-2.sh",
-    "return-type": "json",
-    "interval": 1,
-    "on-click": "hyprctl dispatch workspace 2"
-  },
-  "custom/workspace-3": {
-    "exec": "~/.config/waybar/scripts/workspaces/workspace-3.sh",
-    "return-type": "json",
-    "interval": 1,
-    "on-click": "hyprctl dispatch workspace 3"
-  },
-  "custom/workspace-4": {
-    "exec": "~/.config/waybar/scripts/workspaces/workspace-4.sh",
-    "return-type": "json",
-    "interval": 1,
-    "on-click": "hyprctl dispatch workspace 4"
-  },
-  "custom/workspace-5": {
-    "exec": "~/.config/waybar/scripts/workspaces/workspace-5.sh",
-    "return-type": "json",
-    "interval": 1,
-    "on-click": "hyprctl dispatch workspace 5"
-  },
-
-  "custom/gpu": {
-    "exec": "~/.config/waybar/scripts/gpu.sh",
-    "return-type": "json",
-    "interval": 3,
-    "tooltip": true
-  },
-
-  "custom/volume": {
-    "exec": "~/.config/waybar/scripts/volume.sh",
-    "return-type": "json",
-    "interval": 2,
-    "on-click": "pavucontrol",
-    "on-scroll-up": "wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SINK@ 5%+",
-    "on-scroll-down": "wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-"
-  },
-
-  "memory": {
-    "interval": 5,
-    "format": "[ mem {}% ]"
-  }
+  "height": 36,
+  "margin-top": 14,
+  "margin-left": 14,
+  "margin-right": 14,
+  "spacing": 6,
+  "modules-left": ["clock", "hyprland/workspaces"],
+  "modules-center": ["hyprland/window"],
+  "modules-right": ["custom/nowplaying", "custom/displaymode", "custom/accent", "custom/network", "custom/gpu", "cpu", "memory", "pulseaudio", "pulseaudio#microphone", "tray", "custom/power"],
+  "hyprland/workspaces": {"format": "[ {name} ]", "on-click": "activate", "sort-by-number": true},
+  "hyprland/window": {"format": "{title}", "max-length": 88, "separate-outputs": true},
+  "clock": {"format": "[ {:%a %d %b  %H:%M} ]", "format-alt": "[ {:%Y-%m-%d %H:%M:%S} ]", "tooltip-format": "<tt>{calendar}</tt>"},
+  "cpu": {"format": "[ CPU {usage}% ]", "interval": 2, "tooltip-format": "CPU Usage"},
+  "memory": {"format": "[ RAM {percentage}% ]", "interval": 2, "tooltip-format": "RAM: {used:0.1f}GB / {total:0.1f}GB"},
+  "pulseaudio": {"format": "[ VOL {volume}%", "format-muted": "[ VOL muted", "on-click": "pavucontrol", "scroll-step": 5},
+  "pulseaudio#microphone": {"format": " MIC {format_source} ]", "format-source": "{volume}%", "format-source-muted": "off", "on-click": "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle", "on-scroll-up": "wpctl set-volume -l 1.0 @DEFAULT_AUDIO_SOURCE@ 5%+", "on-scroll-down": "wpctl set-volume @DEFAULT_AUDIO_SOURCE@ 5%-"},
+  "tray": {"icon-size": 14, "spacing": 8},
+  "custom/displaymode": {"exec": "~/.config/hypr/scripts/display-mode.sh waybar", "return-type": "json", "interval": 2, "on-click": "~/.config/hypr/scripts/display-mode.sh menu", "on-click-right": "~/.config/hypr/scripts/display-mode.sh next", "tooltip": true},
+  "custom/accent": {"exec": "~/.config/hypr/scripts/accent-theme.sh waybar", "return-type": "json", "interval": 5, "on-click": "~/.config/hypr/scripts/accent-theme.sh toggle", "tooltip": true},
+  "custom/power": {"format": "[ ⏻ ]", "tooltip": false, "on-click": "~/.config/waybar/scripts/power-menu.sh"},
+  "custom/gpu": {"exec": "~/.config/waybar/scripts/gpu.sh", "interval": 5, "tooltip": false},
+  "custom/network": {"exec": "~/.config/waybar/scripts/network.sh", "return-type": "json", "interval": 3},
+  "custom/nowplaying": {"exec": "~/.config/waybar/scripts/nowplaying.sh", "interval": 3, "tooltip": false, "on-click": "playerctl play-pause"}
 }

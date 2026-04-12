@@ -17,7 +17,7 @@ Item {
     }
     height: inputHeight * 1.5
     width: inputWidth * 1.5
-    radius: 0
+    radius: 4
     visible: config.LoginBackground == "true" ? true : false
     color: config.bgDark
     opacity: config.opacityPanel
@@ -95,7 +95,7 @@ Item {
           }
           border.color: config.buttonBorderNormal
           border.width: 1
-          radius: 0
+          radius: 2
           opacity: config.opacityDefault
         }
         states: [

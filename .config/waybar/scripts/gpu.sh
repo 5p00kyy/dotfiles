@@ -1,13 +1,12 @@
-#!/usr/bin/env bash
-set -euo pipefail
-class="ok"
-if command -v amdgpu_top >/dev/null 2>&1; then
-  gpu_json=$(amdgpu_top -J -n 1 2>/dev/null || true)
-  gpu_use=$(jq -r '.devices[0].gpu_activity.GFX.value // 0' <<<"$gpu_json" 2>/dev/null || echo 0)
-  gpu_temp=$(jq -r '.devices[0].Sensors["Edge Temperature"].value // .devices[0].Sensors["Junction Temperature"].value // 0' <<<"$gpu_json" 2>/dev/null || echo 0)
-  gpu_name=$(jq -r '.devices[0].Info.DeviceName // "AMD GPU"' <<<"$gpu_json" 2>/dev/null || echo "AMD GPU")
-  if (( gpu_temp >= 85 )); then class="crit"; elif (( gpu_temp >= 75 )); then class="warn"; fi
-  jq -cn --arg text "[ gpu ${gpu_temp}c ${gpu_use}% ]" --arg class "$class" --arg tooltip "${gpu_name}\nGPU temp: ${gpu_temp}C\nGPU usage: ${gpu_use}%" '{text:$text,class:$class,tooltip:$tooltip}'
-  exit 0
+#!/bin/bash
+
+# AMD GPU stats from sysfs
+TEMP=$(cat /sys/class/drm/card1/device/hwmon/hwmon*/temp1_input 2>/dev/null)
+USAGE=$(cat /sys/class/drm/card1/device/gpu_busy_percent 2>/dev/null)
+
+if [[ -n "$TEMP" ]]; then
+    TEMP_C=$((TEMP / 1000))
+    echo "[ GPU ${TEMP_C}C ${USAGE}% ]"
+else
+    echo "[ GPU N/A ]"
 fi
-jq -cn '{text:"[ gpu n/a ]",class:"warn",tooltip:"GPU stats unavailable"}'

@@ -21,7 +21,7 @@ Item {
       }
       border.color: config.buttonBorderNormal
       border.width: 1
-      radius: 0
+      radius: 2
       opacity: config.opacityDefault
     }
     states: [

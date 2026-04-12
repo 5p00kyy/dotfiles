@@ -29,7 +29,7 @@ Item {
         color: config.bgDefault
         border.color: config.bgDefault
         border.width: 1
-        radius: 0
+        radius: 2
       }
       states: [
         State {
@@ -40,7 +40,7 @@ Item {
             color: config.viewitemBgPressed
             border.color: config.viewitemBorderPressed
             border.width: 1
-            radius: 0
+            radius: 2
           }
         },
         State {
@@ -51,7 +51,7 @@ Item {
             color: config.viewitemBgHovered
             border.color: config.viewitemBorderHovered
             border.width: 1
-            radius: 0
+            radius: 2
           }
         }
       ]
@@ -87,7 +87,7 @@ Item {
       }
       border.color: config.buttonBorderNormal
       border.width: 1
-      radius: 0
+      radius: 2
       opacity: config.opacityDefault
     }
     states: [
@@ -164,7 +164,7 @@ Item {
       color: config.buttonBgNormal
       border.color: config.buttonBorderNormal
       border.width: 1
-      radius: 0
+      radius: 2
     }
     contentItem: ListView {
       id: sessionList

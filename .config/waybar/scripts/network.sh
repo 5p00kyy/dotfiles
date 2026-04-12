@@ -1,18 +1,35 @@
-#!/usr/bin/env bash
-set -euo pipefail
-iface=$(ip route show default 2>/dev/null | awk '/default/ {print $5; exit}')
-if [[ -z "${iface:-}" ]]; then
-  jq -cn '{text:"[ net down ]",class:"crit",tooltip:"No default route"}'
-  exit 0
+#!/bin/bash
+
+# Get primary interface
+INTERFACE=$(ip route | grep default | awk '{print $5}' | head -1)
+
+if [[ -z "$INTERFACE" ]]; then
+    echo '{"text": "[ NET -- ]", "tooltip": "No network"}'
+    exit 0
 fi
-ping_ms=$(ping -n -q -c 1 -W 1 1.1.1.1 2>/dev/null | awk -F'/' 'END{if (NF>=5) printf "%d", $5}')
-class="ok"
-lat="--"
-if [[ -n "${ping_ms:-}" ]]; then
-  lat="${ping_ms}ms"
-  if (( ping_ms >= 120 )); then class="warn"; fi
+
+# Read bytes
+RX1=$(cat /sys/class/net/$INTERFACE/statistics/rx_bytes)
+TX1=$(cat /sys/class/net/$INTERFACE/statistics/tx_bytes)
+sleep 1
+RX2=$(cat /sys/class/net/$INTERFACE/statistics/rx_bytes)
+TX2=$(cat /sys/class/net/$INTERFACE/statistics/tx_bytes)
+
+# Calculate KB/s
+RX_KB=$(( (RX2 - RX1) / 1024 ))
+TX_KB=$(( (TX2 - TX1) / 1024 ))
+
+# Format
+if [[ $RX_KB -ge 1024 ]]; then
+    RX_FMT="$(awk "BEGIN {printf \"%.1f\", $RX_KB/1024}")M"
 else
-  class="warn"
+    RX_FMT="${RX_KB}K"
 fi
-ip4=$(ip -4 addr show dev "$iface" 2>/dev/null | awk '/inet / {print $2; exit}')
-jq -cn --arg text "[ ${iface} ${lat} ]" --arg class "$class" --arg tooltip "Interface: ${iface}\nIP: ${ip4:-unknown}\nLatency: ${lat}" '{text:$text,class:$class,tooltip:$tooltip}'
+
+if [[ $TX_KB -ge 1024 ]]; then
+    TX_FMT="$(awk "BEGIN {printf \"%.1f\", $TX_KB/1024}")M"
+else
+    TX_FMT="${TX_KB}K"
+fi
+
+echo "{\"text\": \"[ ${TX_FMT} ${RX_FMT} ]\", \"tooltip\": \"Interface: $INTERFACE\\nUp: ${TX_FMT}/s\\nDown: ${RX_FMT}/s\"}"

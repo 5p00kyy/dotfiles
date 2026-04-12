@@ -1,32 +1,33 @@
+/* Power Menu Style */
+
 window {
-  background-color: rgba(40, 44, 52, 0.96);
-  border: 2px solid #61afef;
-  border-radius: 4px;
+    background-color: #0c0c0c;
+    border: 2px solid #7f12ff;
+    border-radius: 8px;
 }
 
 * {
-  font-family: "JetBrainsMono Nerd Font", monospace;
-  font-size: 14px;
+    font-family: "JetBrainsMono Nerd Font", monospace;
+    font-size: 14px;
 }
 
 #outer-box {
-  margin: 10px;
+    margin: 10px;
 }
 
 #text {
-  padding: 10px 15px;
-  color: #fab387;
+    padding: 10px 15px;
+    color: #a0a0a0;
 }
 
 #entry {
-  border-radius: 3px;
+    border-radius: 6px;
 }
 
 #entry:selected {
-  background-color: #191919;
-  border: 1px solid #56b6c2;
+    background-color: #7f12ff;
 }
 
 #entry:selected #text {
-  color: #e5c07b;
+    color: #ffffff;
 }
