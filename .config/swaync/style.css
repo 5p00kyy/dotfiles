@@ -1,3 +1,5 @@
+@import url("../theme/current-accent.css");
+
 * {
   font-family: "JetBrainsMono Nerd Font", monospace;
   font-size: 11px;
@@ -38,7 +40,7 @@
 }
 
 .notification .app-name {
-  color: #3fb950;
+  color: @accent;
 }
 
 .notification .body,

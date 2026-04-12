@@ -1,8 +1,10 @@
 // ============================================================================
-//  System HUD - Purple Cyberpunk Theme
+//  System HUD — Accent-aware theme
 // ============================================================================
 
-// Colors
+@import 'accent';
+
+// Base
 $bg: #0a0a0a;
 $bg-light: #111111;
 $bg-lighter: #1a1a1a;
@@ -13,11 +15,6 @@ $text: #a0a0a0;
 $text-dim: #505050;
 $text-bright: #e0e0e0;
 
-$accent: #7f12ff;
-$accent-dim: #5a0db8;
-$accent-glow: rgba(127, 18, 255, 0.3);
-
-// Base
 * {
   all: unset;
   font-family: "JetBrainsMono Nerd Font", monospace;
