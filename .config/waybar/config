@@ -74,7 +74,7 @@
     "exec": "~/.config/hypr/scripts/display-mode.sh waybar",
     "return-type": "json",
     "interval": 2,
-    "on-click": "~/.config/hypr/scripts/desktop_controls.py display",
+    "on-click": "hyprctl dispatch exec \"[float; center; size 720 520] ~/.config/hypr/scripts/desktop_controls.py display\"",
     "on-click-right": "~/.config/hypr/scripts/display-mode.sh next",
     "tooltip": true
   },
@@ -82,7 +82,7 @@
     "exec": "~/.config/hypr/scripts/accent-theme.sh waybar",
     "return-type": "json",
     "interval": 5,
-    "on-click": "~/.config/hypr/scripts/desktop_controls.py accent",
+    "on-click": "hyprctl dispatch exec \"[float; center; size 720 520] ~/.config/hypr/scripts/desktop_controls.py accent\"",
     "tooltip": true,
     "on-click-right": "~/.config/hypr/scripts/accent-theme.sh toggle"
   },
@@ -111,7 +111,7 @@
     "exec": "~/.config/hypr/scripts/idle_manager.py waybar",
     "return-type": "json",
     "interval": 5,
-    "on-click": "~/.config/hypr/scripts/desktop_controls.py idle",
+    "on-click": "hyprctl dispatch exec \"[float; center; size 720 520] ~/.config/hypr/scripts/desktop_controls.py idle\"",
     "on-click-right": "~/.config/hypr/scripts/idle_manager.py toggle-sleep",
     "on-click-middle": "~/.config/hypr/scripts/idle_manager.py toggle-lock",
     "tooltip": true
