@@ -76,9 +76,14 @@ def get_outputs() -> str:
 
 class ControlsWindow(Gtk.Window):
     def __init__(self, initial_tab: str = "idle") -> None:
-        super().__init__(title="Desktop controls")
-        self.set_default_size(620, 420)
+        title_map = {"idle": "Idle", "display": "Display", "accent": "Accent"}
+        super().__init__(title=f"Desktop controls · {title_map.get(initial_tab, 'Idle')}")
+        self.set_default_size(720, 520)
+        self.set_resizable(True)
         self.set_border_width(12)
+        self.set_position(Gtk.WindowPosition.CENTER)
+        self.set_type_hint(Gdk.WindowTypeHint.DIALOG)
+        self.set_keep_above(True)
         self.connect("destroy", Gtk.main_quit)
 
         provider = Gtk.CssProvider()
