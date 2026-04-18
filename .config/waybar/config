@@ -6,21 +6,114 @@
   "margin-left": 14,
   "margin-right": 14,
   "spacing": 6,
-  "modules-left": ["clock", "hyprland/workspaces"],
-  "modules-center": ["hyprland/window"],
-  "modules-right": ["custom/nowplaying", "custom/displaymode", "custom/accent", "custom/network", "custom/gpu", "cpu", "memory", "pulseaudio", "pulseaudio#microphone", "tray", "custom/power"],
-  "hyprland/workspaces": {"format": "[ {name} ]", "on-click": "activate", "sort-by-number": true},
-  "hyprland/window": {"format": "{title}", "max-length": 88, "separate-outputs": true},
-  "clock": {"format": "[ {:%a %d %b  %H:%M} ]", "format-alt": "[ {:%Y-%m-%d %H:%M:%S} ]", "tooltip-format": "<tt>{calendar}</tt>"},
-  "cpu": {"format": "[ CPU {usage}% ]", "interval": 2, "tooltip-format": "CPU Usage"},
-  "memory": {"format": "[ RAM {percentage}% ]", "interval": 2, "tooltip-format": "RAM: {used:0.1f}GB / {total:0.1f}GB"},
-  "pulseaudio": {"format": "[ VOL {volume}%", "format-muted": "[ VOL muted", "on-click": "pavucontrol", "scroll-step": 5},
-  "pulseaudio#microphone": {"format": " MIC {format_source} ]", "format-source": "{volume}%", "format-source-muted": "off", "on-click": "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle", "on-scroll-up": "wpctl set-volume -l 1.0 @DEFAULT_AUDIO_SOURCE@ 5%+", "on-scroll-down": "wpctl set-volume @DEFAULT_AUDIO_SOURCE@ 5%-"},
-  "tray": {"icon-size": 14, "spacing": 8},
-  "custom/displaymode": {"exec": "~/.config/hypr/scripts/display-mode.sh waybar", "return-type": "json", "interval": 2, "on-click": "~/.config/hypr/scripts/display-mode.sh menu", "on-click-right": "~/.config/hypr/scripts/display-mode.sh next", "tooltip": true},
-  "custom/accent": {"exec": "~/.config/hypr/scripts/accent-theme.sh waybar", "return-type": "json", "interval": 5, "on-click": "~/.config/hypr/scripts/accent-theme.sh toggle", "tooltip": true},
-  "custom/power": {"format": "[ ⏻ ]", "tooltip": false, "on-click": "~/.config/waybar/scripts/power-menu.sh"},
-  "custom/gpu": {"exec": "~/.config/waybar/scripts/gpu.sh", "interval": 5, "tooltip": false},
-  "custom/network": {"exec": "~/.config/waybar/scripts/network.sh", "return-type": "json", "interval": 3},
-  "custom/nowplaying": {"exec": "~/.config/waybar/scripts/nowplaying.sh", "interval": 3, "tooltip": false, "on-click": "playerctl play-pause"}
+  "modules-left": [
+    "clock",
+    "hyprland/workspaces"
+  ],
+  "modules-center": [
+    "hyprland/window"
+  ],
+  "modules-right": [
+    "custom/nowplaying",
+    "custom/displaymode",
+    "custom/accent",
+    "custom/network",
+    "custom/gpu",
+    "cpu",
+    "memory",
+    "pulseaudio",
+    "pulseaudio#microphone",
+    "tray",
+    "custom/idle",
+    "custom/power"
+  ],
+  "hyprland/workspaces": {
+    "format": "[ {name} ]",
+    "on-click": "activate",
+    "sort-by-number": true
+  },
+  "hyprland/window": {
+    "format": "{title}",
+    "max-length": 88,
+    "separate-outputs": true
+  },
+  "clock": {
+    "format": "[ {:%a %d %b  %H:%M} ]",
+    "format-alt": "[ {:%Y-%m-%d %H:%M:%S} ]",
+    "tooltip-format": "<tt>{calendar}</tt>"
+  },
+  "cpu": {
+    "format": "[ CPU {usage}% ]",
+    "interval": 2,
+    "tooltip-format": "CPU Usage"
+  },
+  "memory": {
+    "format": "[ RAM {percentage}% ]",
+    "interval": 2,
+    "tooltip-format": "RAM: {used:0.1f}GB / {total:0.1f}GB"
+  },
+  "pulseaudio": {
+    "format": "[ VOL {volume}%",
+    "format-muted": "[ VOL muted",
+    "on-click": "pavucontrol",
+    "scroll-step": 5
+  },
+  "pulseaudio#microphone": {
+    "format": " MIC {format_source} ]",
+    "format-source": "{volume}%",
+    "format-source-muted": "off",
+    "on-click": "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle",
+    "on-scroll-up": "wpctl set-volume -l 1.0 @DEFAULT_AUDIO_SOURCE@ 5%+",
+    "on-scroll-down": "wpctl set-volume @DEFAULT_AUDIO_SOURCE@ 5%-"
+  },
+  "tray": {
+    "icon-size": 14,
+    "spacing": 8
+  },
+  "custom/displaymode": {
+    "exec": "~/.config/hypr/scripts/display-mode.sh waybar",
+    "return-type": "json",
+    "interval": 2,
+    "on-click": "~/.config/hypr/scripts/desktop_controls.py display",
+    "on-click-right": "~/.config/hypr/scripts/display-mode.sh next",
+    "tooltip": true
+  },
+  "custom/accent": {
+    "exec": "~/.config/hypr/scripts/accent-theme.sh waybar",
+    "return-type": "json",
+    "interval": 5,
+    "on-click": "~/.config/hypr/scripts/desktop_controls.py accent",
+    "tooltip": true,
+    "on-click-right": "~/.config/hypr/scripts/accent-theme.sh toggle"
+  },
+  "custom/power": {
+    "format": "[ \u23fb ]",
+    "tooltip": false,
+    "on-click": "~/.config/waybar/scripts/power-menu.sh"
+  },
+  "custom/gpu": {
+    "exec": "~/.config/waybar/scripts/gpu.sh",
+    "interval": 5,
+    "tooltip": false
+  },
+  "custom/network": {
+    "exec": "~/.config/waybar/scripts/network.sh",
+    "return-type": "json",
+    "interval": 3
+  },
+  "custom/nowplaying": {
+    "exec": "~/.config/waybar/scripts/nowplaying.sh",
+    "interval": 3,
+    "tooltip": false,
+    "on-click": "playerctl play-pause"
+  },
+  "custom/idle": {
+    "exec": "~/.config/hypr/scripts/idle_manager.py waybar",
+    "return-type": "json",
+    "interval": 5,
+    "on-click": "~/.config/hypr/scripts/desktop_controls.py idle",
+    "on-click-right": "~/.config/hypr/scripts/idle_manager.py toggle-sleep",
+    "on-click-middle": "~/.config/hypr/scripts/idle_manager.py toggle-lock",
+    "tooltip": true
+  }
 }

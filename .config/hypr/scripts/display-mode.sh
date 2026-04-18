@@ -92,7 +92,7 @@ waybar_json() {
   mode=$(current_state)
   outputs=$(hyprctl -j monitors 2>/dev/null | jq -r '[.[].name] | join(", ")' 2>/dev/null || echo "unknown")
   text="[ ${mode} ]"
-  tooltip="Left click: choose display profile
+  tooltip="Left click: open display controls
 Right click: cycle profile
 Active outputs: ${outputs}"
   class=$(printf '%s' "$mode" | tr -c '[:alnum:]' '-')

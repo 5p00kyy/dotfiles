@@ -27,6 +27,7 @@ window#waybar {
 #memory,
 #pulseaudio,
 #tray,
+#custom-idle,
 #custom-power {
   margin-top: 6px;
   margin-bottom: 6px;
@@ -42,6 +43,7 @@ window#waybar {
 #memory,
 #pulseaudio,
 #tray,
+#custom-idle,
 #custom-power {
   padding: 0 10px;
   background: #161b22;
@@ -119,7 +121,8 @@ window#waybar {
 #cpu:hover,
 #memory:hover,
 #pulseaudio:hover,
-#tray:hover {
+#tray:hover,
+#custom-idle:hover {
   color: #e6edf3;
   border-color: @accent;
 }
@@ -144,4 +147,20 @@ tooltip {
 tooltip label {
   color: #e6edf3;
   font-family: "JetBrainsMono Nerd Font", "Geist Mono", monospace;
+}
+
+#custom-idle {
+  color: @accent;
+}
+
+#custom-idle.sleep-off {
+  color: @accent_soft;
+}
+
+#custom-idle.display-off {
+  color: #79c0ff;
+}
+
+#custom-idle.lock-off {
+  color: #ffb86b;
 }

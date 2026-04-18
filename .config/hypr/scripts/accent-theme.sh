@@ -116,7 +116,7 @@ waybar_json() {
   t=$(current)
   short_name=$(echo "$t" | cut -c1-3 | tr '[:lower:]' '[:upper:]')
   class="accent-${t}"
-  jq -cn --arg text "[ ACC ${short_name} ]" --arg class "$class" --arg tooltip "Click: next accent
+  jq -cn --arg text "[ ACC ${short_name} ]" --arg class "$class" --arg tooltip "Left click: open accent controls\nRight click: next accent
 Current: ${t}
 All: ${ALL_ACCENTS}" '{text: $text, class: $class, tooltip: $tooltip}'
 }
