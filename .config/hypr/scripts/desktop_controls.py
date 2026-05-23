@@ -27,11 +27,12 @@ LOCK_OPTIONS = [("5m", 300), ("10m", 600), ("15m", 900), ("20m", 1200), ("30m", 
 DISPLAY_OFF_OPTIONS = [("1m", 60), ("2m", 120), ("5m", 300), ("10m", 600), ("15m", 900), ("20m", 1200), ("30m", 1800)]
 SLEEP_OPTIONS = [("30m", 1800), ("45m", 2700), ("60m", 3600), ("90m", 5400)]
 DISPLAY_MODES = [
-    ("desk", "Desk 1440p 90Hz"),
-    ("desk-165", "Desk 1440p 165Hz"),
-    ("dual", "Dual monitor"),
+    ("desk", "Desk 1440p 165Hz"),
+    ("deck", "Deck 1440p 90Hz"),
     ("tv-extend", "TV extend"),
-    ("tv-mirror", "TV mirror"),
+    ("tv-mirror-1440", "TV mirror 1440p"),
+    ("tv-mirror-4k", "TV mirror 4K"),
+    ("tv-mirror-120", "TV mirror 1080p 120Hz"),
 ]
 
 

@@ -47,34 +47,45 @@ apply_mode() {
 
   case "$mode" in
     desk)
-      apply_kw "DP-1,2560x1440@90,0x0,auto,bitdepth,12,vrr,1"
-      disable_if_present DP-2
-      disable_if_present DP-3
-      disable_if_present HDMI-A-1
-      ;;
-    desk-165)
       apply_kw "DP-1,2560x1440@165,0x0,auto,bitdepth,12,vrr,1"
-      disable_if_present DP-2
-      disable_if_present DP-3
-      disable_if_present HDMI-A-1
-      ;;
-    dual)
-      apply_kw "DP-1,2560x1440@90,0x0,auto,bitdepth,12,vrr,1"
-      disable_if_present HDMI-A-1
       if [[ -n "$second" ]]; then
         apply_kw "$second,1920x1080@144,2560x0,auto,bitdepth,12,vrr,1"
       fi
+      disable_if_present HDMI-A-1
+      ;;
+    deck)
+      apply_kw "DP-1,2560x1440@90,0x0,auto,bitdepth,12,vrr,1"
+      if [[ -n "$second" ]]; then
+        apply_kw "$second,1920x1080@144,2560x0,auto,bitdepth,12,vrr,1"
+      fi
+      disable_if_present HDMI-A-1
       ;;
     tv-extend)
-      apply_kw "DP-1,2560x1440@90,0x0,auto,bitdepth,12,vrr,1"
-      disable_if_present DP-2
-      disable_if_present DP-3
-      apply_kw "HDMI-A-1,3840x2160@60,2560x0,auto,bitdepth,10"
+      apply_kw "DP-1,2560x1440@165,0x0,auto,bitdepth,12,vrr,1"
+      if [[ -n "$second" ]]; then
+        apply_kw "$second,1920x1080@144,2560x0,auto,bitdepth,12,vrr,1"
+      fi
+      apply_kw "HDMI-A-1,3840x2160@60,auto,auto,bitdepth,10"
       ;;
-    tv-mirror)
+    tv-mirror-1440)
+      apply_kw "DP-1,2560x1440@165,0x0,auto,bitdepth,12,vrr,1"
+      if [[ -n "$second" ]]; then
+        apply_kw "$second,1920x1080@144,2560x0,auto,bitdepth,12,vrr,1"
+      fi
+      apply_kw "HDMI-A-1,2560x1440@60,auto,auto,bitdepth,10,mirror,DP-1"
+      ;;
+    tv-mirror-4k)
+      apply_kw "DP-1,3840x2160@60,0x0,auto,bitdepth,12,vrr,1"
+      if [[ -n "$second" ]]; then
+        apply_kw "$second,1920x1080@144,3840x0,auto,bitdepth,12,vrr,1"
+      fi
+      apply_kw "HDMI-A-1,3840x2160@60,auto,auto,bitdepth,10,mirror,DP-1"
+      ;;
+    tv-mirror-120)
       apply_kw "DP-1,1920x1080@120,0x0,auto,bitdepth,12,vrr,1"
-      disable_if_present DP-2
-      disable_if_present DP-3
+      if [[ -n "$second" ]]; then
+        apply_kw "$second,1920x1080@144,1920x0,auto,bitdepth,12,vrr,1"
+      fi
       apply_kw "HDMI-A-1,1920x1080@120,auto,auto,bitdepth,10,mirror,DP-1"
       ;;
     *)
@@ -101,8 +112,7 @@ Active outputs: ${outputs}"
 
 menu() {
   local choice
-  choice=$(printf '%s
-'     "desk"     "desk-165"     "dual"     "tv-extend"     "tv-mirror" | wofi --show dmenu --prompt "display" --width 260 --height 320 --cache-file /dev/null)
+  choice=$(printf '%s\n' "desk" "deck" "tv-extend" "tv-mirror-1440" "tv-mirror-4k" "tv-mirror-120" | wofi --show dmenu --prompt "display" --width 260 --height 320 --cache-file /dev/null)
   [[ -n "${choice:-}" ]] && apply_mode "$choice"
 }
 
@@ -110,10 +120,11 @@ next_mode() {
   local current next
   current=$(current_state)
   case "$current" in
-    desk) next=desk-165 ;;
-    desk-165) next=dual ;;
-    dual) next=tv-extend ;;
-    tv-extend) next=tv-mirror ;;
+    desk) next=deck ;;
+    deck) next=tv-extend ;;
+    tv-extend) next=tv-mirror-1440 ;;
+    tv-mirror-1440) next=tv-mirror-4k ;;
+    tv-mirror-4k) next=tv-mirror-120 ;;
     *) next=desk ;;
   esac
   apply_mode "$next"

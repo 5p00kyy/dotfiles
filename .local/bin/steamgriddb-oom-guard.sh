@@ -1,6 +1,6 @@
 #!/bin/bash
 set -euo pipefail
-PATTERN="/home/pacey/homebrew/plugins/decky-steamgriddb/main.py"
+PATTERN="$HOME/homebrew/plugins/decky-steamgriddb/main.py"
 MAX_RSS_KB="${MAX_RSS_KB:-1500000}"
 INTERVAL="${INTERVAL:-5}"
 

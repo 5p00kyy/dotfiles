@@ -31,10 +31,13 @@ Arch Linux + Hyprland dotfiles with an **electric purple cyberpunk minimal** the
 │   │   └── scripts
 │   │       └── network.sh
 │   ├── hypr
+│   │   ├── conf
+│   │   ├── hypridle.conf
 │   │   ├── hyprland.conf
-│   │   ├── hyprpaper.conf
+│   │   ├── hyprlock.conf
 │   │   └── scripts
-│   │       └── wallpaper.sh
+│   │       ├── display-mode.sh
+│   │       └── toggle-eww-sidebar.sh
 │   ├── kitty
 │   │   └── kitty.conf
 │   ├── pipewire
@@ -72,7 +75,7 @@ Arch Linux + Hyprland dotfiles with an **electric purple cyberpunk minimal** the
 
 ```bash
 # Core
-yay -S hyprland waybar kitty wofi swaync hyprpaper
+yay -S hyprland hypridle hyprlock waybar kitty wofi swaync
 
 # EWW sidebar
 yay -S eww jq playerctl

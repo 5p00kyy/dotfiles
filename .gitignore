@@ -1,1 +1,4 @@
 .config/theme/current-accent.css
+.config/hypr/idle_state.json
+__pycache__/
+*.bak

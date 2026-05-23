@@ -164,3 +164,7 @@ tooltip label {
 #custom-idle.lock-off {
   color: #ffb86b;
 }
+
+#custom-idle.lock-off.display-off.sleep-off {
+  color: @accent;
+}
