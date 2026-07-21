@@ -49,6 +49,13 @@ apply_mode() {
     desk)
       apply_kw "DP-1,2560x1440@165,0x0,auto,bitdepth,12,vrr,1"
       if [[ -n "$second" ]]; then
+        disable_if_present "$second"
+      fi
+      disable_if_present HDMI-A-1
+      ;;
+    desk-dual)
+      apply_kw "DP-1,2560x1440@165,0x0,auto,bitdepth,12,vrr,1"
+      if [[ -n "$second" ]]; then
         apply_kw "$second,1920x1080@144,2560x0,auto,bitdepth,12,vrr,1"
       fi
       disable_if_present HDMI-A-1
@@ -112,7 +119,7 @@ Active outputs: ${outputs}"
 
 menu() {
   local choice
-  choice=$(printf '%s\n' "desk" "deck" "tv-extend" "tv-mirror-1440" "tv-mirror-4k" "tv-mirror-120" | wofi --show dmenu --prompt "display" --width 260 --height 320 --cache-file /dev/null)
+  choice=$(printf '%s\n' "desk" "desk-dual" "deck" "tv-extend" "tv-mirror-1440" "tv-mirror-4k" "tv-mirror-120" | wofi --show dmenu --prompt "display" --width 260 --height 360 --cache-file /dev/null)
   [[ -n "${choice:-}" ]] && apply_mode "$choice"
 }
 
@@ -120,7 +127,8 @@ next_mode() {
   local current next
   current=$(current_state)
   case "$current" in
-    desk) next=deck ;;
+    desk) next=desk-dual ;;
+    desk-dual) next=deck ;;
     deck) next=tv-extend ;;
     tv-extend) next=tv-mirror-1440 ;;
     tv-mirror-1440) next=tv-mirror-4k ;;
